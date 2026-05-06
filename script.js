@@ -101,9 +101,28 @@ if (contactForm) {
   contactForm.addEventListener("submit", (e) => {
     e.preventDefault();
     alert(
-      "আপনার প্রস্তাবটি আমাদের সার্ভারে পৌঁছেছে! এখন আব্বাকে জিজ্ঞেস করে তানজিম আহমেদ উৎসব আপনাকে ফোন দিবেন। (৭১টি ব্যবসা সামলাতে একটু সময় তো লাগবেই!)",
+      "আপনার প্রস্তাবটি আমাদের সার্ভারে পৌঁছেছে! এখন আব্বাকে জিজ্ঞেস করে তানজীম আহমেদ উৎস আপনাকে ফোন দিবেন। (৭১টি ব্যবসা সামলাতে একটু সময় তো লাগবেই!)",
     );
     contactForm.reset();
+  });
+}
+
+// VIP Form Handling
+const vipForm = document.getElementById("vip-form");
+if (vipForm) {
+  vipForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const funnyMessages = [
+      "আপনার রাজকীয় আবেদনটি তানজীম আহমেদ উৎস গ্রহণ করেছেন! আব্বার সাথে কথা বলে তিনি এখনই আপনার বাড়ির ছাদে হেলিকপ্টার পাঠাচ্ছেন। কফি রেডি রাখুন!",
+      "উফ! এত টাকা? আব্বার ৭২ নম্বর ব্যবসাটা বোধহয় আপনার কারণেই সফল হবে। অভিনন্দন!",
+      "আবেদনটি পড়ার সময় উৎস ভাই হাসিতে ফেটে পড়েছেন। আপনি এখন অফিসিয়ালি আমাদের 'রাজকীয় ছেঁড়া নোট' সরবরাহকারী!",
+      "আপনার বাড়ির হেলিপ্যাড চেক করুন, উৎস এর আব্বা নিজস্ব হেলিকপ্টারে করে কস্টেপ নিয়ে আসছেন!",
+    ];
+    const randomMessage =
+      funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
+    alert(randomMessage);
+    closeVIPModal();
+    vipForm.reset();
   });
 }
 
