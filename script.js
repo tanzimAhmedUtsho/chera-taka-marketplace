@@ -4,7 +4,7 @@ const products = [
     name: "৫০০ টাকার অর্ধেক",
     price: "৳ ২৫০",
     condition: "মুমূর্ষু",
-    img: "https://images.unsplash.com/photo-1593672715438-d88a75639fac?q=80&w=400&h=250&auto=format&fit=crop",
+    img: "/image/500 tk.png",
     history:
       "এই নোটটি দিয়ে একবার সিংগারা কেনার চেষ্টা করা হয়েছিল। দোকানদার অর্ধেকটা রেখে বাকিটা ফেরত দিয়েছে। এটি এখন ত্যাগের প্রতীক।",
     fact: "এটি পকেটে থাকলে মানিব্যাগ অনেক হালকা লাগে, যা মানসিকভাবে শান্তি দেয়।",
@@ -13,7 +13,7 @@ const products = [
     name: "২ টাকার ঐতিহাসিক ছেঁড়া নোট",
     price: "৳ ৫০",
     condition: "ইঁদুরে খাওয়া",
-    img: "https://images.unsplash.com/photo-1621932953986-15fcf084da0f?q=80&w=400&h=250&auto=format&fit=crop",
+    img: "/image/2 tk .png",
     history:
       "এটি একটি লাইব্রেরির কোণায় পড়ে ছিল। ইঁদুর বাবাজি তার ডিনার হিসেবে এর ৬০% সাবাড় করেছেন। এটি এখন একটি দুর্লভ শিল্পকর্ম।",
     fact: "বাকি ৪০% দিয়ে আপনি এখনো ১টা চকলেট কেনার সাহস করতে পারেন (যদি দোকানদার পরিচিত হয়)।",
@@ -22,7 +22,7 @@ const products = [
     name: "১০০০ টাকার টেপ লাগানো নোট",
     price: "৳ ৮০০",
     condition: "আইসিইউতে", // Corrected typo: "আইসিইউতে" instead of "আইসিইউতে"
-    img: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=400&h=250&auto=format&fit=crop",
+    img: "/image/1000 tk.png",
     history:
       "এই নোটটি ১০ বার হাতবদল হয়েছে এবং প্রতিবারই নতুন এক স্তর কস্টেপ যোগ করা হয়েছে। এটি এখন বুলেটপ্রুফ হওয়ার পথে।",
     fact: "এটিতে এখন অরিজিনাল কাগজের চেয়ে প্লাস্টিকের পরিমাণ বেশি।",
@@ -52,8 +52,7 @@ const reviews = [
     name: "হাসিব ফাটাকেষ্ট",
     comment:
       "আমার ইঁদুরে খাওয়া নোটগুলো এখানে বিক্রি করে আমি এখন নতুন নোটের মালিক! অবিশ্বাস্য!",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&h=150&auto=format&fit=crop",
+    avatar: "/image/Hasib.jpg",
     rating: "⭐⭐⭐⭐⭐",
     isVerified: true,
   },
@@ -61,8 +60,7 @@ const reviews = [
     name: "পল্লব ক্ষতি ",
     comment:
       "কস্টেপ দিয়ে লাগানো ৫০০ টাকার নোট কেউ নিচ্ছিল না, কিন্তু এখানে ভালো দামে বিক্রি করলাম।",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&h=150&auto=format&fit=crop",
+    avatar: "/image/Pollob.jpg",
     rating: "⭐⭐⭐⭐",
     isVerified: false,
   },
@@ -70,8 +68,7 @@ const reviews = [
     name: "শিরাপন",
     comment:
       "দুর্দান্ত সার্ভিস! ছেঁড়া টাকার এমন কদর আগে কোথাও দেখিনি। নোটের অবস্থা যতোই খারাপ হোক, তারা নেয়!",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&auto=format&fit=crop",
+    avatar: "/image/Shrapon.jpg",
     rating: "⭐⭐⭐⭐⭐",
     isVerified: false,
   },
