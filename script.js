@@ -1,99 +1,85 @@
-// Sample Data for torn money
-const tornNotes = [
+// Sample Product Injection
+const products = [
   {
-    title: "৫০০ টাকা (কস্টেপ স্পেশাল)",
-    condition: "মাঝখান দিয়ে ২ ভাগ",
-    price: "৩২০ টাকা",
-    img: "https://via.placeholder.com/300x180/222/fbbf24?text=500+Taka+Torn",
+    name: "৫০০ টাকার অর্ধেক",
+    price: "৳ ২৫০",
+    condition: "মুমূর্ষু",
+    img: "https://images.unsplash.com/photo-1593672715438-d88a75639fac?q=80&w=400&h=250&auto=format&fit=crop",
   },
   {
-    title: "১০০০ টাকা (ইঁদুরে খাওয়া)",
-    condition: "কোনার ২০% নেই",
-    price: "৪৫০ টাকা",
-    img: "https://via.placeholder.com/300x180/222/fbbf24?text=1000+Taka+Missing",
+    name: "২ টাকার ঐতিহাসিক ছেঁড়া নোট",
+    price: "৳ ৫০",
+    condition: "ইঁদুরে খাওয়া",
+    img: "https://images.unsplash.com/photo-1621932953986-15fcf084da0f?q=80&w=400&h=250&auto=format&fit=crop",
   },
   {
-    title: "১০০ টাকা (ভিজে যাওয়া)",
-    condition: "রং একটু ঝাপসা",
-    price: "৮৫ টাকা",
-    img: "https://via.placeholder.com/300x180/222/fbbf24?text=100+Taka+Wet",
+    name: "১০০০ টাকার টেপ লাগানো নোট",
+    price: "৳ ৮০০",
+    condition: "আইসিইউতে",
+    img: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=400&h=250&auto=format&fit=crop",
   },
 ];
 
-// Sample Data for client reviews
-const clientReviews = [
+const productGrid = document.getElementById("product-grid");
+if (productGrid) {
+  products.forEach((p) => {
+    productGrid.innerHTML += `
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-yellow-500/50 transition group">
+                <img src="${p.img}" class="w-full h-48 object-cover rounded-xl mb-4 grayscale group-hover:grayscale-0 transition" />
+                <h3 class="text-xl font-bold">${p.name}</h3>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-yellow-500 font-bold">${p.price}</span>
+                    <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded-md">${p.condition}</span>
+                </div>
+                <button class="w-full mt-4 py-2 border border-white/10 rounded-lg hover:bg-white/10 transition">বিস্তারিত দেখুন</button>
+            </div>
+        `;
+  });
+}
+
+// Sample Reviews Injection
+const reviews = [
   {
     name: "আবুল কাশেম",
-    role: "নিয়মিত বিক্রেতা",
     comment:
-      "কস্টেপ লাগানো ৫০০ টাকার নোট নিয়ে খুব বিপদে ছিলাম, কেউ নিচ্ছিলো না। এখানে এসে ভালো দামে বিক্রি করলাম!",
-    img: "https://i.pravatar.cc/150?u=abul",
+      "আমার ইঁদুরে খাওয়া নোটগুলো এখানে বিক্রি করে আমি এখন নতুন নোটের মালিক! অবিশ্বাস্য!",
+    avatar: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Kashem",
+    rating: "⭐⭐⭐⭐⭐",
   },
   {
-    name: "মরিয়ম বেগম",
-    role: "কালেক্টর",
+    name: "জরিনা বেগম",
     comment:
-      "আমি ইঁদুরে খাওয়া নোট সংগ্রহ করি। এখান থেকে দারুণ কিছু রেয়ার কালেকশন পেয়েছি। জাস্ট অসাধারণ!",
-    img: "https://i.pravatar.cc/150?u=marium",
+      "কস্টেপ দিয়ে লাগানো ৫০০ টাকার নোট কেউ নিচ্ছিল না, কিন্তু এখানে ভালো দামে বিক্রি করলাম।",
+    avatar: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Zorina",
+    rating: "⭐⭐⭐⭐",
   },
   {
-    name: "জলিল মিয়া",
-    role: "ব্যবসাী",
+    name: "করিম মিয়া",
     comment:
-      "ছেঁড়া টাকা যে অমূল্য সম্পদ হতে পারে, এই ওয়েবসাইট না দেখলে বিশ্বাস করতাম না। প্রতি সপ্তাহে আমি এখানে চেক করি।",
-    img: "https://i.pravatar.cc/150?u=jolil",
+      "দুর্দান্ত সার্ভিস! ছেঁড়া টাকার এমন কদর আগে কোথাও দেখিনি। নোটের অবস্থা যতোই খারাপ হোক, তারা নেয়!",
+    avatar: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Karim",
+    rating: "⭐⭐⭐⭐⭐",
   },
 ];
 
-// Function to render notes
-const renderNotes = () => {
-  const grid = document.getElementById("product-grid");
-  grid.innerHTML = tornNotes
-    .map(
-      (note) => `
-        <div class="glass-card p-6 rounded-2xl">
-            <img src="${note.img}" alt="Torn Note" class="w-full h-40 object-cover rounded-xl mb-4 grayscale hover:grayscale-0 transition duration-500">
-            <h3 class="text-xl font-bold text-white mb-2">${note.title}</h3>
-            <p class="text-sm text-gray-500 mb-4 italic">অবস্থা: ${note.condition}</p>
-            <div class="flex justify-between items-center">
-                <span class="text-yellow-500 font-mono font-bold text-lg">${note.price}</span>
-                <button onclick="showAlert()" class="text-xs bg-white text-black px-3 py-2 rounded-lg font-bold">কিনুন</button>
-            </div>
-        </div>
-    `,
-    )
-    .join("");
-};
-
-// Function to render reviews
-const renderReviews = () => {
-  const reviewGrid = document.getElementById("reviews-grid");
-  reviewGrid.innerHTML = clientReviews
-    .map(
-      (review) => `
-        <div class="glass-card p-6 rounded-2xl border border-white/5 bg-white/5">
-            <div class="flex items-center gap-4 mb-4">
-                <img src="${review.img}" alt="${review.name}" class="w-12 h-12 rounded-full border-2 border-yellow-500">
-                <div>
-                    <h4 class="text-white font-bold">${review.name}</h4>
-                    <p class="text-xs text-yellow-500">${review.role}</p>
+const reviewsGrid = document.getElementById("reviews-grid");
+if (reviewsGrid) {
+  reviews.forEach((r) => {
+    reviewsGrid.innerHTML += `
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-yellow-500/30 transition">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="${r.avatar}" class="w-12 h-12 rounded-full bg-yellow-500/20" />
+                    <div>
+                        <h4 class="text-white font-bold">${r.name}</h4>
+                        <div class="text-yellow-500 text-xs">${r.rating}</div>
+                    </div>
                 </div>
+                <p class="text-gray-300 italic">"${r.comment}"</p>
             </div>
-            <p class="text-gray-400 text-sm italic leading-relaxed">"${review.comment}"</p>
-        </div>
-    `,
-    )
-    .join("");
-};
+        `;
+  });
+}
 
-const showAlert = () => {
-  alert(
-    "আরে ভাই! সত্যি সত্যি ছেঁড়া টাকা কিনতে আসলেন? এটা তো জাস্ট মজা করার জন্য বানানো ওয়েবসাইট!",
-  );
-};
-
-// Initialize
-document.addEventListener("DOMContentLoaded", () => {
-  renderNotes();
-  renderReviews();
-});
+function showAlert() {
+  alert("আপনার ছেঁড়া নোটের দাম জানতে আগে স্ক্যানার দিয়ে স্ক্যান করুন!");
+}
