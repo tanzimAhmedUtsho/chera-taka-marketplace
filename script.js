@@ -4,7 +4,7 @@ const products = [
     name: "৫০০ টাকার অর্ধেক",
     price: "৳ ২৫০",
     condition: "মুমূর্ষু",
-    img: "/image/500 tk.png",
+    img: "https://images.unsplash.com/photo-1593672715438-d88a75639fac?q=80&w=400&h=250&auto=format&fit=crop",
     history:
       "এই নোটটি দিয়ে একবার সিংগারা কেনার চেষ্টা করা হয়েছিল। দোকানদার অর্ধেকটা রেখে বাকিটা ফেরত দিয়েছে। এটি এখন ত্যাগের প্রতীক।",
     fact: "এটি পকেটে থাকলে মানিব্যাগ অনেক হালকা লাগে, যা মানসিকভাবে শান্তি দেয়।",
@@ -13,7 +13,7 @@ const products = [
     name: "২ টাকার ঐতিহাসিক ছেঁড়া নোট",
     price: "৳ ৫০",
     condition: "ইঁদুরে খাওয়া",
-    img: "/image/2 tk .png",
+    img: "https://images.unsplash.com/photo-1621932953986-15fcf084da0f?q=80&w=400&h=250&auto=format&fit=crop",
     history:
       "এটি একটি লাইব্রেরির কোণায় পড়ে ছিল। ইঁদুর বাবাজি তার ডিনার হিসেবে এর ৬০% সাবাড় করেছেন। এটি এখন একটি দুর্লভ শিল্পকর্ম।",
     fact: "বাকি ৪০% দিয়ে আপনি এখনো ১টা চকলেট কেনার সাহস করতে পারেন (যদি দোকানদার পরিচিত হয়)।",
@@ -21,8 +21,8 @@ const products = [
   {
     name: "১০০০ টাকার টেপ লাগানো নোট",
     price: "৳ ৮০০",
-    condition: "আইসিইউতে",
-    img: "/image/1000 tk.png",
+    condition: "আইসিইউতে", // Corrected typo: "আইসিইউতে" instead of "আইসিইউতে"
+    img: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=400&h=250&auto=format&fit=crop",
     history:
       "এই নোটটি ১০ বার হাতবদল হয়েছে এবং প্রতিবারই নতুন এক স্তর কস্টেপ যোগ করা হয়েছে। এটি এখন বুলেটপ্রুফ হওয়ার পথে।",
     fact: "এটিতে এখন অরিজিনাল কাগজের চেয়ে প্লাস্টিকের পরিমাণ বেশি।",
@@ -52,7 +52,8 @@ const reviews = [
     name: "হাসিব ফাটাকেষ্ট",
     comment:
       "আমার ইঁদুরে খাওয়া নোটগুলো এখানে বিক্রি করে আমি এখন নতুন নোটের মালিক! অবিশ্বাস্য!",
-    avatar: "/image/Hasib.jpg",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&h=150&auto=format&fit=crop",
     rating: "⭐⭐⭐⭐⭐",
     isVerified: true,
   },
@@ -82,7 +83,7 @@ if (reviewsGrid) {
     reviewsGrid.innerHTML += `
             <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-yellow-500/30 transition">
                 <div class="flex items-center gap-4 mb-4">
-                    <img src="${r.avatar}" class="w-12 h-12 rounded-full bg-yellow-500/20 object-cover" />
+                    <img src="${r.avatar}" class="w-16 h-16 rounded-full bg-yellow-500/20 object-cover" />
                     <div>
                         <h4 class="text-white font-bold flex items-center gap-2">
                             ${r.name}
@@ -111,10 +112,29 @@ if (contactForm) {
 
 // VIP Modal Logic
 const vipModal = document.getElementById("vip-modal");
+let businessCounterInterval;
 
 function openVIPModal() {
   vipModal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
+
+  // Start Father's Business Counter
+  const counterElement = document.getElementById("business-counter");
+  if (counterElement) {
+    let current = 0;
+    const target = 71;
+    counterElement.innerText = current;
+
+    clearInterval(businessCounterInterval);
+    businessCounterInterval = setInterval(() => {
+      if (current < target) {
+        current++;
+        counterElement.innerText = current;
+      } else {
+        clearInterval(businessCounterInterval);
+      }
+    }, 40);
+  }
 }
 
 function closeVIPModal() {

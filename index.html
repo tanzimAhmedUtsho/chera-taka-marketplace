@@ -217,6 +217,11 @@
           <h2 class="text-3xl font-extrabold text-white mb-2">
             VIP মেম্বারশিপ
           </h2>
+          <div
+            class="text-yellow-500 font-mono text-xl mb-4 font-bold border-y border-yellow-500/20 py-2 inline-block px-4"
+          >
+            আব্বুর ব্যবসার সংখ্যা: <span id="business-counter">0</span>টি
+          </div>
           <p class="text-yellow-500 font-bold mb-6">
             শুধুমাত্র ১ কোটি টাকার বেশি মূল্যের নোটের জন্য
           </p>
@@ -231,16 +236,62 @@
               • পরের বার টাকা ছিঁড়লে বিশেষ অ্যাম্বুলেন্স সার্ভিস ফ্রি!
             </p>
           </div>
-          <button
-            onclick="
-              alert(
-                'অভিনন্দন! আপনার ১ কোটি টাকার ছেঁড়া নোটের কথা আব্বাকে জানানো হয়েছে। তিনি এখনই হেলিকপ্টার পাঠাচ্ছেন!',
-              )
-            "
-            class="w-full bg-yellow-500 text-black font-bold py-4 rounded-xl hover:bg-yellow-400 transition shadow-lg shadow-yellow-500/20"
+          <form
+            id="vip-form"
+            class="space-y-4 text-left border-t border-white/10 pt-6"
           >
-            আবেদন করুন
-          </button>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1"
+                >নোটের দাম (কোটি টাকায়)</label
+              >
+              <select
+                required
+                class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm focus:border-yellow-500 outline-none text-white"
+              >
+                <option value="1">১ কোটি (ইশ! অনেক গরিব তো আপনি!)</option>
+                <option value="100">১০০ কোটি (এখন কথা বলার মত হইছে)</option>
+                <option value="500">৫০০ কোটি (বসেন বসেন, চা খান)</option>
+                <option value="infinite">
+                  আমার আব্বার ব্যবসার চেয়েও বেশি!
+                </option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1"
+                >নোটটি কীভাবে ছিঁড়লো?</label
+              >
+              <select
+                required
+                class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm focus:border-yellow-500 outline-none text-white"
+              >
+                <option value="dog">বিলাতি কুত্তায় কামড় দিছে</option>
+                <option value="fight">
+                  বউয়ের সাথে মানিব্যাগ নিয়ে টানাটানি
+                </option>
+                <option value="sea">
+                  পকেটে রাইখা সমুদ্র ভ্রমণ (লবণাক্ত পানি)
+                </option>
+                <option value="tape">টেপ মারতে মারতে নোটের হদিস নাই</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="helipad"
+                required
+                class="accent-yellow-500 h-4 w-4"
+              />
+              <label for="helipad" class="text-xs text-gray-400"
+                >আমার বাড়ির ছাদে হেলিকপ্টার নামার জায়গা আছে</label
+              >
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-yellow-500 text-black font-bold py-3 rounded-xl hover:bg-yellow-400 transition shadow-lg shadow-yellow-500/20"
+            >
+              রাজকীয় আবেদন পাঠান
+            </button>
+          </form>
         </div>
       </div>
     </div>
