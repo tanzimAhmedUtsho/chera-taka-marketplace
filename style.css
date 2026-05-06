@@ -28,3 +28,21 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   border-color: rgba(251, 191, 36, 0.3);
 }
+
+/* Owner Image Glow Animation */
+.owner-glow {
+  animation: glowing-border 3s infinite alternate;
+}
+
+@keyframes glowing-border {
+  0% {
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+    border-color: #fbbf24;
+  }
+  100% {
+    box-shadow:
+      0 0 25px rgba(251, 191, 36, 0.8),
+      0 0 50px rgba(245, 158, 11, 0.3);
+    border-color: #f59e0b;
+  }
+}
