@@ -46,3 +46,44 @@
     border-color: #f59e0b;
   }
 }
+
+/* Floating Advertisement Ticker */
+.ad-ticker {
+  background: #fbbf24;
+  color: #000;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.ad-ticker:hover {
+  cursor: pointer;
+}
+
+.ad-ticker:hover .ad-content {
+  animation-play-state: paused;
+}
+
+.ad-content {
+  display: inline-block;
+  animation: ad-scroll 35s linear infinite;
+  will-change: transform;
+}
+
+@keyframes ad-scroll {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
