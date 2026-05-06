@@ -104,6 +104,82 @@
       </div>
     </section>
 
+    <!-- Contact Section -->
+    <section class="max-w-4xl mx-auto py-20 px-6">
+      <h2
+        class="text-3xl font-bold mb-8 border-l-4 border-yellow-500 pl-4 text-white"
+      >
+        যোগাযোগ করুন (অফার নিয়ে আসুন)
+      </h2>
+      <div
+        class="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 shadow-xl"
+      >
+        <form id="contact-form" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2"
+                >আপনার নাম</label
+              >
+              <input
+                type="text"
+                required
+                placeholder="যেমন: বিল গেটস"
+                class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2"
+                >ইমেইল এড্রেস</label
+              >
+              <input
+                type="email"
+                required
+                placeholder="rich-person@email.com"
+                class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition text-white"
+              />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-2"
+              >বিষয় (মজাদার বিষয় বাছুন)</label
+            >
+            <select
+              class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition text-gray-300"
+            >
+              <option value="buy">আমার আব্বা আপনার কোম্পানি কিনতে চায়</option>
+              <option value="collab">
+                ৭১টা ব্যবসার সাথে আপনারটা যোগ করতে চাই
+              </option>
+              <option value="investment">
+                ছেঁড়া টাকা দিয়ে ইনভেস্ট করতে চাই
+              </option>
+              <option value="urgent">আব্বা জরুরি তলব করেছেন</option>
+              <option value="just-hello">
+                এমনিই, অনেক টাকা তো তাই হাই বলতে এলাম
+              </option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-2"
+              >আপনার প্রস্তাব</label
+            >
+            <textarea
+              rows="4"
+              required
+              placeholder="আপনার কোটি টাকার প্রস্তাবটি এখানে লিখুন..."
+              class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition text-white"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-yellow-500 text-black font-bold py-4 rounded-xl hover:bg-yellow-400 transition transform hover:scale-[1.02]"
+          >
+            প্রস্তাবটি পাঠিয়ে দিন
+          </button>
+        </form>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="py-10 text-center border-t border-white/10 text-gray-500">
       <p>

@@ -80,6 +80,18 @@ if (reviewsGrid) {
   });
 }
 
+// Contact Form Handling
+const contactForm = document.getElementById("contact-form");
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert(
+      "আপনার প্রস্তাবটি আমাদের সার্ভারে পৌঁছেছে! এখন আব্বাকে জিজ্ঞেস করে তানজিম আহমেদ উৎসব আপনাকে ফোন দিবেন। (৭১টি ব্যবসা সামলাতে একটু সময় তো লাগবেই!)",
+    );
+    contactForm.reset();
+  });
+}
+
 function showAlert() {
   alert("আপনার ছেঁড়া নোটের দাম জানতে আগে স্ক্যানার দিয়ে স্ক্যান করুন!");
 }
