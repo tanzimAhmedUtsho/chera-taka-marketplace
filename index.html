@@ -18,6 +18,12 @@
       <div class="space-x-8 hidden md:flex">
         <a href="#" class="hover:text-yellow-500 transition">বিক্রি করুন</a>
         <a href="#" class="hover:text-yellow-500 transition">কালেকশন</a>
+        <a
+          href="javascript:void(0)"
+          onclick="openVIPModal()"
+          class="text-yellow-500 font-bold hover:text-yellow-400 transition flex items-center gap-1"
+          >👑 VIP মেম্বারশিপ</a
+        >
         <button
           class="bg-yellow-500 text-black px-5 py-2 rounded-full font-bold hover:bg-yellow-400 transition"
         >
@@ -187,6 +193,58 @@
         রাজপুত্র)
       </p>
     </footer>
+
+    <!-- VIP Modal -->
+    <div
+      id="vip-modal"
+      class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-6"
+    >
+      <div
+        class="bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-500 rounded-3xl max-w-lg w-full p-8 relative shadow-[0_0_50px_rgba(234,179,8,0.2)]"
+      >
+        <button
+          onclick="closeVIPModal()"
+          class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
+        >
+          &times;
+        </button>
+        <div class="text-center">
+          <div
+            class="w-20 h-20 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-yellow-500 animate-bounce"
+          >
+            <span class="text-3xl">👑</span>
+          </div>
+          <h2 class="text-3xl font-extrabold text-white mb-2">
+            VIP মেম্বারশিপ
+          </h2>
+          <p class="text-yellow-500 font-bold mb-6">
+            শুধুমাত্র ১ কোটি টাকার বেশি মূল্যের নোটের জন্য
+          </p>
+          <div class="space-y-4 text-left mb-8">
+            <p class="text-gray-300">
+              • তানজিম উৎসবের আব্বার সাথে ডিনার (৭১টি ব্যবসার গল্প শুনতে
+              পারবেন)।
+            </p>
+            <p class="text-gray-300">
+              • আপনার ছেঁড়া নোটটি সরাসরি দুবাই পাঠানো হবে কস্টেপ লাগানোর জন্য।
+            </p>
+            <p class="text-gray-300">
+              • পরের বার টাকা ছিঁড়লে বিশেষ অ্যাম্বুলেন্স সার্ভিস ফ্রি!
+            </p>
+          </div>
+          <button
+            onclick="
+              alert(
+                'অভিনন্দন! আপনার ১ কোটি টাকার ছেঁড়া নোটের কথা আব্বাকে জানানো হয়েছে। তিনি এখনই হেলিকপ্টার পাঠাচ্ছেন!',
+              )
+            "
+            class="w-full bg-yellow-500 text-black font-bold py-4 rounded-xl hover:bg-yellow-400 transition shadow-lg shadow-yellow-500/20"
+          >
+            আবেদন করুন
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>

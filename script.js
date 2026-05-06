@@ -4,7 +4,7 @@ const products = [
     name: "৫০০ টাকার অর্ধেক",
     price: "৳ ২৫০",
     condition: "মুমূর্ষু",
-    img: "https://images.unsplash.com/photo-1593672715438-d88a75639fac?q=80&w=400&h=250&auto=format&fit=crop",
+    img: "/image/500 tk.png",
   },
   {
     name: "২ টাকার ঐতিহাসিক ছেঁড়া নোট",
@@ -91,6 +91,23 @@ if (contactForm) {
     contactForm.reset();
   });
 }
+
+// VIP Modal Logic
+const vipModal = document.getElementById("vip-modal");
+
+function openVIPModal() {
+  vipModal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeVIPModal() {
+  vipModal.classList.add("hidden");
+  document.body.style.overflow = "auto";
+}
+
+window.addEventListener("click", (e) => {
+  if (e.target === vipModal) closeVIPModal();
+});
 
 function showAlert() {
   alert("আপনার ছেঁড়া নোটের দাম জানতে আগে স্ক্যানার দিয়ে স্ক্যান করুন!");
