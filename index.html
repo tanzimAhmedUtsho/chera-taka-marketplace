@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taka-Tukro | ছেঁড়া টাকার প্রিমিয়াম বাজার</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="bg-[#0a0a0a] text-gray-200 font-sans selection:bg-yellow-500 selection:text-black"
+  >
+    <!-- Header -->
+    <nav class="p-6 flex justify-between items-center border-b border-white/10">
+      <div class="text-2xl font-bold tracking-tighter text-white">
+        TAKA<span class="text-yellow-500">.TUKRO</span>
+      </div>
+      <div class="space-x-8 hidden md:flex">
+        <a href="#" class="hover:text-yellow-500 transition">বিক্রি করুন</a>
+        <a href="#" class="hover:text-yellow-500 transition">কালেকশন</a>
+        <button
+          class="bg-yellow-500 text-black px-5 py-2 rounded-full font-bold hover:bg-yellow-400 transition"
+        >
+          লগইন
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="py-20 px-6 text-center">
+      <h1
+        class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight"
+      >
+        আপনার ছেঁড়া নোটটি কি <br />
+        <span
+          class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600"
+          >ফেলে দেওয়ার মতো?</span
+        >
+      </h1>
+      <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-lg">
+        আমরাই দিচ্ছি ছেঁড়া টাকার সঠিক "অ-মূল্য"! কস্টে টেপ লাগানো ৫০০ টাকার নোট
+        হোক বা ইঁদুরে খাওয়া ২ টাকার নোট—আমাদের কাছে সবই অমূল্য সম্পদ।
+      </p>
+      <div class="flex justify-center gap-4">
+        <button
+          onclick="showAlert()"
+          class="border border-white/20 px-8 py-4 rounded-xl hover:bg-white/5 transition"
+        >
+          দাম জানুন
+        </button>
+        <button
+          class="bg-white text-black px-8 py-4 rounded-xl font-bold hover:bg-gray-200 transition"
+        >
+          বিজ্ঞাপন দিন
+        </button>
+      </div>
+    </header>
+
+    <!-- Market Section -->
+    <section class="max-w-6xl mx-auto py-20 px-6">
+      <h2 class="text-3xl font-bold mb-12 border-l-4 border-yellow-500 pl-4">
+        সদ্য আসা "ছেঁড়া" কালেকশন
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="product-grid">
+        <!-- JS will inject items here -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 text-center border-t border-white/10 text-gray-500">
+      <p>&copy; ২০২৬ টাকা-টুকরো ডট কম | এটি একটি ফানি প্রজেক্ট মাত্র!</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
