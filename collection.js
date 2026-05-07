@@ -191,11 +191,11 @@ function showDetails(id) {
   const addBtn = document.getElementById("modal-add-btn");
 
   content.innerHTML = `
-    <img src="${item.img}" class="w-full h-52 object-cover rounded-2xl mb-6 shadow-xl border border-white/10">
+    <img src="${item.img}" class="w-full h-64 object-cover rounded-2xl mb-6 shadow-xl border border-white/10">
     <h2 class="text-2xl font-bold text-white mb-4">${item.title}</h2>
     <div class="text-left space-y-4">
-       <p class="text-gray-300 text-sm leading-relaxed"><span class="text-orange-500 font-bold block mb-1">📜 ইতিহাস:</span> ${item.history || item.desc}</p>
-       <p class="text-gray-300 text-sm leading-relaxed"><span class="text-yellow-500 font-bold block mb-1">✨ মজার তথ্য:</span> ${item.fact || "এটি একটি অত্যন্ত দুর্লভ নোট যা দেখলে চোখ জুড়িয়ে যায়!"}</p>
+       <p class="text-gray-300 text-base leading-relaxed p-4 bg-white/5 rounded-xl border border-white/5"><span class="text-orange-500 font-bold block mb-1 text-lg">📜 এই নোটের করুণ ইতিহাস:</span> ${item.history || item.desc}</p>
+       <p class="text-gray-300 text-base leading-relaxed p-4 bg-white/5 rounded-xl border border-white/5"><span class="text-yellow-500 font-bold block mb-1 text-lg">✨ আপনি কি জানেন?</span> ${item.fact || "এটি একটি অত্যন্ত দুর্লভ নোট যা দেখলে চোখ জুড়িয়ে যায়!"}</p>
     </div>
   `;
 
@@ -256,7 +256,8 @@ function updateCartUI() {
     .join("");
 
   const formattedTotal = total > 0 ? `৳ ${total}` : "অমূল্য!";
-  cartTotalLabel.innerText = navTotalLabel.innerText = formattedTotal;
+  if (cartTotalLabel) cartTotalLabel.innerText = formattedTotal;
+  if (navTotalLabel) navTotalLabel.innerText = formattedTotal;
 }
 
 function removeFromCart(index) {
@@ -264,13 +265,37 @@ function removeFromCart(index) {
   updateCartUI();
 }
 
-function checkoutCart() {
-  alert(
-    "উফ! এত টাকার নোট? উৎস ভাই খুশি হয়ে আপনাকে তার ৭১টি ব্যবসার একটি গিফট করার কথা ভাবছেন! (যদিও সেটা হবে না)",
-  );
+function openCheckoutModal() {
+  document.getElementById("checkout-modal").classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCheckoutModal() {
+  document.getElementById("checkout-modal").classList.add("hidden");
+  document.body.style.overflow = "auto";
+}
+
+function submitCheckoutForm(e) {
+  e.preventDefault();
+  const funnyResponses = [
+    "অর্ডার কনফার্ম! উৎস ভাই এখনই ৭১ নম্বর ব্যবসা থেকে হেলিকপ্টার বের করছেন। কফি রেডি রাখেন!",
+    "আপনার অর্ডারটি উৎস ভাইয়ের আব্বা স্বয়ং এপ্রুভ করেছেন। হেলিপ্যাডে সিগন্যাল দিতে থাকুন!",
+    "কস্টেপ লাগানো নোট দিয়ে পেমেন্ট করার জন্য আপনাকে 'বছরের সেরা মিতব্যয়ী' উপাধি দেওয়া হলো। 🏅",
+    "অর্ডার সফল! আপনার পেমেন্ট গেটওয়েতে কস্টেপ শনাক্ত হয়েছে, উৎস ভাই খুব খুশি!",
+  ];
+  alert(funnyResponses[Math.floor(Math.random() * funnyResponses.length)]);
   cart = [];
   updateCartUI();
+  closeCheckoutModal();
   toggleCart();
+}
+
+function checkoutCart() {
+  if (cart.length === 0) {
+    alert("আগে কিছু নোট তো কার্টে ভরুন! কিপটেমি বাদ দিন।");
+    return;
+  }
+  openCheckoutModal();
 }
 
 function filterCollections() {
@@ -279,7 +304,9 @@ function filterCollections() {
   const selectedSort = sortOrder ? sortOrder.value : "default";
 
   let filtered = collections.filter((item) => {
-    const matchesSearch = item.title.toLowerCase().includes(searchTerm);
+    const matchesSearch =
+      item.title.toLowerCase().includes(searchTerm) ||
+      item.desc.toLowerCase().includes(searchTerm);
     const matchesCategory =
       selectedCategory === "all" || item.category === selectedCategory;
     return matchesSearch && matchesCategory;
