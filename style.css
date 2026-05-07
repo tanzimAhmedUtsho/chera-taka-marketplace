@@ -151,22 +151,22 @@ body.light-mode .border-white\/20 {
   border-color: rgba(0, 0, 0, 0.1);
 }
 
-body.light-mode .market-board,
 body.light-mode .offer-tape,
-body.light-mode .note-slip {
+body.light-mode .auction-console,
+body.light-mode .international-certificate {
   background: rgba(255, 255, 255, 0.76);
   border-color: rgba(0, 0, 0, 0.11);
   color: #1a1a1a;
 }
 
-body.light-mode .board-kicker,
-body.light-mode .market-meter span,
-body.light-mode .offer-tape span {
+body.light-mode .offer-tape span,
+body.light-mode .auction-console span,
+body.light-mode .international-certificate p {
   color: #4b5563;
 }
 
-body.light-mode .market-board h2,
-body.light-mode .market-meter strong {
+body.light-mode .auction-console strong,
+body.light-mode .international-certificate strong {
   color: #c2410c;
 }
 
@@ -201,54 +201,164 @@ body {
   opacity: 0.65;
 }
 
-.market-board {
+.auction-console {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(13rem, 0.55fr) minmax(11rem, 0.45fr);
-  gap: 1rem;
-  align-items: stretch;
   margin: 2rem auto 0;
-  max-width: 65rem;
+  max-width: 66rem;
   overflow: hidden;
-  border: 1px solid rgba(251, 191, 36, 0.22);
-  border-radius: 1.5rem;
+  border: 1px solid rgba(251, 191, 36, 0.28);
+  border-radius: 1.25rem;
   background:
-    linear-gradient(135deg, rgba(249, 115, 22, 0.14), transparent 36%),
-    linear-gradient(225deg, rgba(234, 179, 8, 0.13), transparent 42%),
-    rgba(255, 255, 255, 0.045);
-  padding: 1rem;
+    radial-gradient(circle at 12% 0%, rgba(251, 191, 36, 0.16), transparent 18rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.085), transparent 30%),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.13), rgba(234, 179, 8, 0.07)),
+    rgba(6, 6, 6, 0.78);
+  padding: 0.8rem;
   box-shadow:
-    0 2rem 5rem rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 1.75rem 4rem rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
   backdrop-filter: blur(16px);
 }
 
-.market-board::before {
+.auction-console::before {
   content: "";
   position: absolute;
-  inset: -4rem -2rem auto auto;
-  width: 14rem;
-  height: 14rem;
-  border: 1.5rem solid rgba(251, 191, 36, 0.08);
-  border-radius: 50%;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0 38%, rgba(255, 255, 255, 0.08) 42%, transparent 48%);
+  pointer-events: none;
 }
 
-.market-board-main,
-.market-meter,
-.market-note-stack {
+.console-heading {
   position: relative;
   z-index: 1;
-  border-radius: 1rem;
-  background: rgba(0, 0, 0, 0.24);
-}
-
-.market-board-main {
-  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.8rem 0.95rem 0.95rem;
   text-align: left;
 }
 
-.board-kicker,
-.market-meter span {
+.console-heading::after {
+  content: "LIVE";
+  border: 1px solid rgba(34, 197, 94, 0.34);
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.11);
+  color: #86efac;
+  font-size: 0.64rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  padding: 0.35rem 0.55rem;
+}
+
+.console-heading span,
+.console-grid span {
+  color: rgba(251, 191, 36, 0.74);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.console-heading strong {
+  color: #fff7ed;
+  font-size: clamp(1.1rem, 2vw, 1.65rem);
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.console-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.08);
+  margin-top: 0.75rem;
+}
+
+.console-grid div {
+  min-height: 5.1rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 1rem;
+  text-align: left;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.console-grid div:hover {
+  background: rgba(251, 191, 36, 0.08);
+  transform: translateY(-1px);
+}
+
+.console-grid strong {
+  display: block;
+  color: #fff7ed;
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  font-weight: 950;
+  line-height: 1.2;
+  margin-top: 0.45rem;
+}
+
+.international-certificate {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid rgba(251, 191, 36, 0.24);
+  border-radius: 1rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
+    rgba(0, 0, 0, 0.28);
+  margin-top: 0.75rem;
+  padding: 1rem;
+  text-align: left;
+}
+
+.international-certificate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(135deg, rgba(251, 191, 36, 0.045) 0 1px, transparent 1px 0.7rem);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.certificate-seal {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  border-radius: 50%;
+  color: #facc15;
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  background:
+    radial-gradient(circle, rgba(251, 191, 36, 0.18), rgba(0, 0, 0, 0.34)),
+    rgba(0, 0, 0, 0.34);
+  box-shadow:
+    0 0 0 0.35rem rgba(251, 191, 36, 0.055),
+    0 0 1.5rem rgba(251, 191, 36, 0.15);
+}
+
+.international-certificate div:last-child {
+  position: relative;
+  z-index: 1;
+}
+
+.international-certificate span {
   display: block;
   color: rgba(251, 191, 36, 0.78);
   font-size: 0.68rem;
@@ -257,86 +367,20 @@ body {
   text-transform: uppercase;
 }
 
-.market-board h2 {
-  color: #fff7ed;
-  font-size: clamp(1.35rem, 3vw, 2.35rem);
-  font-weight: 900;
-  line-height: 1.08;
-  margin: 0.55rem 0;
-}
-
-.market-board p {
-  color: rgba(229, 231, 235, 0.74);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.market-meter {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.1rem;
-  text-align: left;
-}
-
-.meter-track {
-  height: 0.75rem;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  margin: 0.8rem 0;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-.meter-track i {
+.international-certificate strong {
   display: block;
-  width: 71%;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #f97316, #facc15);
-}
-
-.market-meter strong {
-  color: #facc15;
-  font-size: 1rem;
-}
-
-.market-note-stack {
-  min-height: 8.5rem;
-}
-
-.note-slip {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  width: 6.2rem;
-  height: 3.35rem;
-  border: 1px solid rgba(251, 191, 36, 0.28);
-  border-radius: 0.55rem;
-  background:
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0 2px, transparent 2px 8px),
-    linear-gradient(135deg, rgba(249, 115, 22, 0.28), rgba(234, 179, 8, 0.12));
   color: #fff7ed;
-  font-weight: 900;
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.24);
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-weight: 950;
+  line-height: 1.2;
+  margin-top: 0.28rem;
 }
 
-.note-slip-one {
-  left: 50%;
-  top: 1.2rem;
-  transform: translateX(-50%) rotate(-10deg);
-}
-
-.note-slip-two {
-  left: 50%;
-  top: 3.05rem;
-  transform: translateX(-50%) rotate(7deg);
-}
-
-.note-slip-three {
-  left: 50%;
-  top: 4.95rem;
-  transform: translateX(-50%) rotate(-3deg);
+.international-certificate p {
+  color: rgba(229, 231, 235, 0.72);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin-top: 0.35rem;
 }
 
 .offer-tape {
@@ -418,16 +462,32 @@ body {
 }
 
 @media (max-width: 900px) {
-  .market-board {
+  .console-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .console-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .international-certificate {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .console-grid {
     grid-template-columns: 1fr;
   }
 
-  .market-board-main {
+  .international-certificate {
+    grid-template-columns: 1fr;
     text-align: center;
   }
 
-  .market-note-stack {
-    display: none;
+  .certificate-seal {
+    margin: 0 auto;
   }
 }
 
