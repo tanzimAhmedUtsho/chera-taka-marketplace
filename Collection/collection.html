@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collection | TAKA.TUKRO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&display=swap");
+      body {
+        font-family: "Hind Siliguri", sans-serif;
+        background-color: #0a0a0a;
+        color: white;
+      }
+      .glass-morphism {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .card-hover:hover {
+        transform: translateY(-10px);
+        border-color: #fbbf24;
+        box-shadow: 0 10px 30px -10px rgba(251, 191, 36, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <header
+      class="p-6 flex justify-between items-center border-b border-gray-800 sticky top-0 bg-black z-50"
+    >
+      <div class="text-2xl font-bold tracking-tighter">
+        <span class="text-white">TAKA.</span
+        ><span class="text-yellow-500">TUKRO</span>
+      </div>
+      <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+        <a href="#" class="hover:text-yellow-500 transition">হোম</a>
+        <a href="#" class="text-yellow-500 border-b border-yellow-500"
+          >কালেকশন</a
+        >
+        <a href="#" class="hover:text-yellow-500 transition">বিক্রি করুন</a>
+      </nav>
+      <button
+        class="bg-yellow-500 text-black px-6 py-2 rounded-full font-bold hover:bg-yellow-400 transition"
+      >
+        লগইন
+      </button>
+    </header>
+
+    <section class="py-16 px-6 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4">
+        আমাদের <span class="text-yellow-500">সেরা</span> কালেকশন
+      </h1>
+      <p class="text-gray-400 max-w-2xl mx-auto">
+        ইতিহাস ও স্মৃতির টুকরো—আমাদের কাছে প্রতিটি নোটের রয়েছে আলাদা গল্প। আপনার
+        পছন্দের নোটটি খুঁজে নিন।
+      </p>
+    </section>
+
+    <div
+      class="max-w-7xl mx-auto px-6 mb-12 flex flex-col md:flex-row justify-between items-center gap-4"
+    >
+      <div class="relative w-full md:w-96">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="নোট খুঁজুন (যেমন: ৫০০ টাকা)..."
+          class="w-full bg-gray-900 border border-gray-700 px-5 py-3 rounded-lg focus:outline-none focus:border-yellow-500"
+        />
+        <i class="fas fa-search absolute right-4 top-4 text-gray-500"></i>
+      </div>
+      <div class="flex gap-3 overflow-x-auto pb-2 w-full md:w-auto">
+        <button
+          onclick="filterItems('all')"
+          class="bg-yellow-500 text-black px-5 py-2 rounded-md font-semibold whitespace-nowrap"
+        >
+          সবগুলো
+        </button>
+        <button
+          onclick="filterItems('rare')"
+          class="glass-morphism px-5 py-2 rounded-md hover:bg-gray-800 transition whitespace-nowrap"
+        >
+          রেয়ার নোট
+        </button>
+        <button
+          onclick="filterItems('damaged')"
+          class="glass-morphism px-5 py-2 rounded-md hover:bg-gray-800 transition whitespace-nowrap"
+        >
+          ছেঁড়া নোট
+        </button>
+      </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-6 pb-24">
+      <div
+        id="collection-container"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+      ></div>
+    </main>
+
+    <footer class="border-t border-gray-800 py-10 text-center text-gray-500">
+      <p>&copy; ২০২৬ TAKA.TUKRO | তানজীম আহমেদ উৎস কর্তৃক ডিজাইনকৃত</p>
+    </footer>
+
+    <script src="/Collection/collection.js"></script>
+  </body>
+</html>
