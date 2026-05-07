@@ -120,17 +120,27 @@ const collections = [
   },
 ];
 
-const gridContainer = document.getElementById("collection-grid");
-const searchInput = document.getElementById("searchInput");
-const categoryFilter = document.getElementById("categoryFilter");
-const sortOrder = document.getElementById("sortOrder");
-const resultsCount = document.getElementById("results-count");
-const cartItemsContainer = document.getElementById("cart-items");
-const cartCountLabel = document.getElementById("cart-count");
-const cartTotalLabel = document.getElementById("cart-total");
-const navTotalLabel = document.getElementById("nav-total");
+let gridContainer, searchInput, categoryFilter, sortOrder, resultsCount;
+let cartItemsContainer, cartCountLabel, cartTotalLabel, navTotalLabel;
+
+function initElements() {
+  gridContainer = document.getElementById("collection-grid");
+  searchInput = document.getElementById("searchInput");
+  categoryFilter = document.getElementById("categoryFilter");
+  sortOrder = document.getElementById("sortOrder");
+  resultsCount = document.getElementById("results-count");
+  cartItemsContainer = document.getElementById("cart-items");
+  cartCountLabel = document.getElementById("cart-count");
+  cartTotalLabel = document.getElementById("cart-total");
+  navTotalLabel = document.getElementById("nav-total");
+}
 
 let cart = [];
+let currentHaggleItem = null;
+
+function isNegotiableItem(item) {
+  return item && (item.numericPrice === 0 || item.numericPrice >= 1000000);
+}
 
 function displayCollections(filteredData = collections) {
   if (!gridContainer) return;
@@ -171,6 +181,9 @@ function displayCollections(filteredData = collections) {
                       <span>🛒</span> কার্টে ভরুন
                    </button>
                 </div>
+                <button onclick="openHaggleModal(${item.id})" class="mt-3 w-full py-3 bg-yellow-500/10 border border-yellow-500/30 text-yellow-300 text-xs font-black rounded-xl hover:bg-yellow-500 hover:text-black transition-all duration-300 flex items-center justify-center gap-2">
+                  <span>&#129309;</span> &#2470;&#2494;&#2478;&#2494;&#2470;&#2494;&#2478;&#2495; &#2453;&#2480;&#2497;&#2472;
+                </button>
             </div>
         </div>
     `,
@@ -185,25 +198,37 @@ function toggleCart() {
 }
 
 function showDetails(id) {
-  const item = collections.find((c) => c.id === id);
+  const item = collections.find((c) => c.id === Number(id));
   const modal = document.getElementById("details-modal");
   const content = document.getElementById("details-content");
   const addBtn = document.getElementById("modal-add-btn");
 
-  content.innerHTML = `
+  if (content)
+    content.innerHTML = `
     <img src="${item.img}" class="w-full h-64 object-cover rounded-2xl mb-6 shadow-xl border border-white/10">
     <h2 class="text-2xl font-bold text-white mb-4">${item.title}</h2>
     <div class="text-left space-y-4">
        <p class="text-gray-300 text-base leading-relaxed p-4 bg-white/5 rounded-xl border border-white/5"><span class="text-orange-500 font-bold block mb-1 text-lg">📜 এই নোটের করুণ ইতিহাস:</span> ${item.history || item.desc}</p>
        <p class="text-gray-300 text-base leading-relaxed p-4 bg-white/5 rounded-xl border border-white/5"><span class="text-yellow-500 font-bold block mb-1 text-lg">✨ আপনি কি জানেন?</span> ${item.fact || "এটি একটি অত্যন্ত দুর্লভ নোট যা দেখলে চোখ জুড়িয়ে যায়!"}</p>
     </div>
+    ${
+      item.price === "অমূল্য" || item.price === "আলোচনা সাপেক্ষে"
+        ? `
+      <div id="haggle-trigger" class="mt-6 p-5 bg-yellow-500/10 border-2 border-yellow-500/30 rounded-2xl text-center animate-pulse hover:animate-none transition">
+        <p class="text-yellow-500 text-sm font-bold mb-3">🤝 উৎস ভাই এটি সহজে ছাড়বেন না! একটু দামাদামি করবেন?</p>
+        <button onclick="openHaggleModal(${item.id})" class="px-8 py-2 bg-yellow-500 text-black text-xs font-black rounded-full hover:bg-yellow-400 transition shadow-lg uppercase">উৎস ভাইয়ের সাথে ডিল করুন</button>
+      </div>
+    `
+        : ""
+    }
   `;
 
-  addBtn.onclick = () => {
-    addToCart(id);
-    closeDetailsModal();
-  };
-  modal.classList.remove("hidden");
+  if (addBtn)
+    addBtn.onclick = () => {
+      addToCart(id);
+      closeDetailsModal();
+    };
+  if (modal) modal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 }
 
@@ -213,7 +238,7 @@ function closeDetailsModal() {
 }
 
 function addToCart(id) {
-  const item = collections.find((c) => c.id === id);
+  const item = collections.find((c) => c.id === Number(id));
   cart.push(item);
   updateCartUI();
 
@@ -265,6 +290,82 @@ function removeFromCart(index) {
   updateCartUI();
 }
 
+function openHaggleModal(id) {
+  const item = collections.find((c) => c.id === Number(id));
+  if (!item) {
+    return;
+  }
+  currentHaggleItem = item;
+  const detailsModal = document.getElementById("details-modal");
+  if (detailsModal && !detailsModal.classList.contains("hidden")) {
+    closeDetailsModal();
+  }
+
+  const modal = document.getElementById("haggle-modal");
+  const chat = document.getElementById("haggle-chat");
+  const offerInput = document.getElementById("haggle-offer");
+
+  if (modal && chat) {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    modal.setAttribute("aria-hidden", "false");
+    chat.innerHTML = `<p class="text-orange-400 font-bold">উৎস ভাই: "${item.title}" এর জন্য কী অফার দিচ্ছ ছোট ভাই? মনে রাইখো, আব্বার ৭১ টা ব্যবসা কিন্তু এর ওপরই খাড়া!</p>`;
+    if (offerInput) {
+      offerInput.value = "";
+      setTimeout(() => offerInput.focus(), 80);
+    }
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeHaggleModal() {
+  const modal = document.getElementById("haggle-modal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+    modal.setAttribute("aria-hidden", "true");
+  }
+  document.body.style.overflow = "auto";
+  const offerInput = document.getElementById("haggle-offer");
+  if (offerInput) offerInput.value = "";
+}
+
+function submitHaggle() {
+  const offerInput = document.getElementById("haggle-offer");
+  const chat = document.getElementById("haggle-chat");
+
+  if (!chat) {
+    return;
+  }
+
+  const offerValue = offerInput ? Number(offerInput.value) : 0;
+
+  if (isNaN(offerValue) || offerValue <= 0) {
+    chat.innerHTML += `<p class="text-red-400">সিস্টেম: ফাইজলামি বন্ধ করেন, একটা আসল দাম বলেন!</p>`;
+    chat.scrollTop = chat.scrollHeight;
+    return;
+  }
+
+  const responses = [
+    `উৎস ভাই: ${offerValue} টাকা? হা হা! এই টাকায় আমার হেলিকপটারে তেলও হয় না। ৫ কোটি নিয়ে এসো, কথা হবে।`,
+    `উৎস ভাই: আব্বাকে বললাম, তিনি হাসতে হাসতে ৭২ নম্বর ব্যবসা খোলার প্ল্যান ক্যানসেল করে দিলেন। আরও বেশি লাগবে!`,
+    `উৎস ভাই: ডিল সম্ভব না। তবে তুমি চাইলে কস্টেপটা ${offerValue} টাকায় কিনতে পারো। নোটটা আমিই রাখছি।`,
+    `উৎস ভাই: তোমার অফার শুনে উৎস ভাই হেলিকপটারে উঠে পড়েছেন। পালানোর জায়গা খুঁজো! 🚁`,
+    `উৎস ভাই: এই নোট টা স্পেশাল। ${offerValue} টাকা দিয়ে তুমি শুধু এর ডেসক্রিপশনটা পড়তে পারবা। 🤣`,
+  ];
+
+  const randomResponse =
+    responses[Math.floor(Math.random() * responses.length)];
+  chat.innerHTML += `<div class="text-right"><span class="bg-white/5 px-3 py-1 rounded-lg text-white inline-block">আপনি: ${offerValue} ৳</span></div>`;
+  chat.innerHTML += `<p class="text-orange-400 font-bold">${randomResponse}</p>`;
+
+  chat.scrollTop = chat.scrollHeight;
+  if (offerInput) {
+    offerInput.value = "";
+    offerInput.focus();
+  }
+}
+
 function openCheckoutModal() {
   document.getElementById("checkout-modal").classList.remove("hidden");
   document.body.style.overflow = "hidden";
@@ -292,13 +393,16 @@ function submitCheckoutForm(e) {
 
 function checkoutCart() {
   if (cart.length === 0) {
-    alert("আগে কিছু নোট তো কার্টে ভরুন! কিপটেমি বাদ দিন।");
+    alert(
+      "আরে ভাই! খালি থলি নিয়ে চেকআউট? উৎস ভাই জানলে হেলিকপ্টার নিয়ে এসে আপনার মানিব্যাগ চেক করবেন। আগে কয়েকটা ছেঁড়া নোট কার্টে ভরুন!",
+    );
     return;
   }
   openCheckoutModal();
 }
 
 function filterCollections() {
+  if (!searchInput) initElements();
   const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : "";
   const selectedCategory = categoryFilter ? categoryFilter.value : "all";
   const selectedSort = sortOrder ? sortOrder.value : "default";
@@ -323,9 +427,15 @@ function filterCollections() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  initElements();
   searchInput?.addEventListener("input", filterCollections);
   categoryFilter?.addEventListener("change", filterCollections);
   sortOrder?.addEventListener("change", filterCollections);
+  document.getElementById("haggle-offer")?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      submitHaggle();
+    }
+  });
+  displayCollections();
 });
-
-displayCollections();

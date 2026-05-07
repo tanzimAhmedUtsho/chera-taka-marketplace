@@ -151,6 +151,67 @@ body.light-mode .border-white\/20 {
   border-color: rgba(0, 0, 0, 0.1);
 }
 
+/* Collection page polish */
+body {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(249, 115, 22, 0.16), transparent 28rem),
+    radial-gradient(circle at 85% 15%, rgba(234, 179, 8, 0.1), transparent 24rem),
+    linear-gradient(180deg, #0a0a0a 0%, #11100d 48%, #080808 100%);
+  min-height: 100vh;
+}
+
+#collection-grid .glass-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+    rgba(10, 10, 10, 0.84);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+#collection-grid .glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.18), transparent 42%, rgba(234, 179, 8, 0.12));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#collection-grid .glass-card:hover::before {
+  opacity: 1;
+}
+
+#details-modal > div,
+#checkout-modal > div,
+#haggle-modal > div {
+  background:
+    linear-gradient(150deg, rgba(31, 41, 55, 0.98), rgba(12, 12, 12, 0.98)),
+    #111827;
+}
+
+#haggle-chat p,
+#haggle-chat div {
+  animation: fadeIn 0.22s ease both;
+}
+
+#haggle-offer:focus {
+  box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.16);
+}
+
+@media (max-width: 640px) {
+  #cart-drawer {
+    width: min(100vw, 22rem);
+  }
+
+  #collection-grid .glass-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {

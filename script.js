@@ -150,6 +150,8 @@ const vipModal = document.getElementById("vip-modal");
 let businessCounterInterval;
 
 function openVIPModal() {
+  const vipModal = document.getElementById("vip-modal");
+  if (!vipModal) return;
   vipModal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 
