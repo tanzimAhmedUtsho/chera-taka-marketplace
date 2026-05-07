@@ -176,3 +176,13 @@ select {
   padding-right: 2.5rem !important;
   appearance: none;
 }
+
+/* Cart Drawer Custom Styles */
+#cart-drawer {
+  box-shadow: -20px 0 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Price badge hover animation */
+.glass-card:hover .absolute.top-4.right-4 {
+  transform: scale(1.1) rotate(-5deg);
+}

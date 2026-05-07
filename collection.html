@@ -109,10 +109,50 @@
       ></div>
     </div>
 
+    <!-- Cart Sidebar/Drawer -->
+    <div
+      id="cart-drawer"
+      class="fixed right-0 top-0 h-full w-80 bg-black/95 backdrop-blur-xl border-l border-white/10 z-[60] transform translate-x-full transition-transform duration-500 p-6 flex flex-col"
+    >
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-xl font-bold text-white">আপনার ছেঁড়া থলি</h2>
+        <button
+          onclick="toggleCart()"
+          class="text-2xl text-gray-400 hover:text-white"
+        >
+          &times;
+        </button>
+      </div>
+      <div id="cart-items" class="flex-grow overflow-y-auto space-y-4 mb-6">
+        <p class="text-gray-500 text-center py-10 italic">
+          থলি খালি! কিছু নোট কিপটেমি না করে কার্টে ভরুন।
+        </p>
+      </div>
+      <div class="border-t border-white/10 pt-6">
+        <div class="flex justify-between mb-4">
+          <span class="text-gray-400">মোট মূল্য:</span>
+          <span id="cart-total" class="text-orange-500 font-bold">৳ ০</span>
+        </div>
+        <button
+          onclick="checkoutCart()"
+          class="w-full py-4 bg-orange-500 text-black font-black rounded-xl hover:bg-orange-400 transition shadow-[0_0_20px_rgba(249,115,22,0.2)]"
+        >
+          আসল টাকা দিয়ে কিনুন
+        </button>
+        <p class="text-[10px] text-gray-500 mt-3 text-center italic">
+          সাবধান: পেমেন্ট গেটওয়েতে কস্টেপ লাগানো নোট গ্রহণ করা হয় না!
+        </p>
+      </div>
+    </div>
+
     <footer
       class="py-10 text-center border-t border-white/10 text-gray-500 mt-20"
     >
-      <p>&copy; ২০২৬ টাকা-টুকরো ডট কম | কালেকশনগুলো সবই কাল্পনিক (হয়তো!)</p>
+      <p>
+        &copy; ২০২৬ টাকা-টুকরো ডট কম | সাবধান: এই নোটগুলো বাজারে চালানোর চেষ্টা
+        করলে গণধোলাইয়ের ১০০% গ্যারান্টি! উৎস ভাই শুধু কস্টেপ দেন, মার বাঁচান না।
+        🤕
+      </p>
     </footer>
 
     <script src="script.js"></script>
