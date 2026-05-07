@@ -151,13 +151,218 @@ body.light-mode .border-white\/20 {
   border-color: rgba(0, 0, 0, 0.1);
 }
 
+body.light-mode .market-board,
+body.light-mode .offer-tape,
+body.light-mode .note-slip {
+  background: rgba(255, 255, 255, 0.76);
+  border-color: rgba(0, 0, 0, 0.11);
+  color: #1a1a1a;
+}
+
+body.light-mode .board-kicker,
+body.light-mode .market-meter span,
+body.light-mode .offer-tape span {
+  color: #4b5563;
+}
+
+body.light-mode .market-board h2,
+body.light-mode .market-meter strong {
+  color: #c2410c;
+}
+
 /* Collection page polish */
 body {
   background:
-    radial-gradient(circle at 15% 10%, rgba(249, 115, 22, 0.16), transparent 28rem),
-    radial-gradient(circle at 85% 15%, rgba(234, 179, 8, 0.1), transparent 24rem),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 18rem),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.08) 0 1px, transparent 1px 9rem),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 8rem),
+    radial-gradient(circle at 12% 12%, rgba(249, 115, 22, 0.2), transparent 30rem),
+    radial-gradient(circle at 88% 18%, rgba(234, 179, 8, 0.16), transparent 28rem),
+    radial-gradient(circle at 50% 92%, rgba(239, 68, 68, 0.12), transparent 34rem),
     linear-gradient(180deg, #0a0a0a 0%, #11100d 48%, #080808 100%);
   min-height: 100vh;
+}
+
+.collection-stage {
+  position: relative;
+  z-index: 1;
+}
+
+.collection-stage::before {
+  content: "";
+  position: absolute;
+  inset: 2rem -2rem auto;
+  height: 12rem;
+  z-index: -1;
+  background:
+    linear-gradient(135deg, transparent 0 48%, rgba(251, 191, 36, 0.16) 48% 52%, transparent 52%),
+    linear-gradient(45deg, transparent 0 48%, rgba(249, 115, 22, 0.12) 48% 52%, transparent 52%);
+  mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
+  opacity: 0.65;
+}
+
+.market-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(13rem, 0.55fr) minmax(11rem, 0.45fr);
+  gap: 1rem;
+  align-items: stretch;
+  margin: 2rem auto 0;
+  max-width: 65rem;
+  overflow: hidden;
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(135deg, rgba(249, 115, 22, 0.14), transparent 36%),
+    linear-gradient(225deg, rgba(234, 179, 8, 0.13), transparent 42%),
+    rgba(255, 255, 255, 0.045);
+  padding: 1rem;
+  box-shadow:
+    0 2rem 5rem rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+}
+
+.market-board::before {
+  content: "";
+  position: absolute;
+  inset: -4rem -2rem auto auto;
+  width: 14rem;
+  height: 14rem;
+  border: 1.5rem solid rgba(251, 191, 36, 0.08);
+  border-radius: 50%;
+}
+
+.market-board-main,
+.market-meter,
+.market-note-stack {
+  position: relative;
+  z-index: 1;
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.market-board-main {
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.board-kicker,
+.market-meter span {
+  display: block;
+  color: rgba(251, 191, 36, 0.78);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.market-board h2 {
+  color: #fff7ed;
+  font-size: clamp(1.35rem, 3vw, 2.35rem);
+  font-weight: 900;
+  line-height: 1.08;
+  margin: 0.55rem 0;
+}
+
+.market-board p {
+  color: rgba(229, 231, 235, 0.74);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.market-meter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.1rem;
+  text-align: left;
+}
+
+.meter-track {
+  height: 0.75rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0.8rem 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.meter-track i {
+  display: block;
+  width: 71%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f97316, #facc15);
+}
+
+.market-meter strong {
+  color: #facc15;
+  font-size: 1rem;
+}
+
+.market-note-stack {
+  min-height: 8.5rem;
+}
+
+.note-slip {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 6.2rem;
+  height: 3.35rem;
+  border: 1px solid rgba(251, 191, 36, 0.28);
+  border-radius: 0.55rem;
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0 2px, transparent 2px 8px),
+    linear-gradient(135deg, rgba(249, 115, 22, 0.28), rgba(234, 179, 8, 0.12));
+  color: #fff7ed;
+  font-weight: 900;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.24);
+}
+
+.note-slip-one {
+  left: 50%;
+  top: 1.2rem;
+  transform: translateX(-50%) rotate(-10deg);
+}
+
+.note-slip-two {
+  left: 50%;
+  top: 3.05rem;
+  transform: translateX(-50%) rotate(7deg);
+}
+
+.note-slip-three {
+  left: 50%;
+  top: 4.95rem;
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+.offer-tape {
+  overflow: hidden;
+  border: 1px solid rgba(251, 191, 36, 0.24);
+  border-radius: 1rem;
+  background:
+    linear-gradient(90deg, rgba(249, 115, 22, 0.16), rgba(234, 179, 8, 0.08)),
+    rgba(0, 0, 0, 0.36);
+  margin: -1rem 0 1.75rem;
+}
+
+.offer-tape div {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-width: max-content;
+  padding: 0.85rem 1rem;
+  animation: offerTape 24s linear infinite;
+}
+
+.offer-tape span {
+  color: rgba(255, 247, 237, 0.86);
+  font-size: 0.85rem;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 #collection-grid .glass-card {
@@ -212,6 +417,20 @@ body {
   }
 }
 
+@media (max-width: 900px) {
+  .market-board {
+    grid-template-columns: 1fr;
+  }
+
+  .market-board-main {
+    text-align: center;
+  }
+
+  .market-note-stack {
+    display: none;
+  }
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -221,6 +440,15 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes offerTape {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 

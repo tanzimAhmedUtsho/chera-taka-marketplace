@@ -69,7 +69,7 @@
       </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="collection-stage max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div class="mb-12 md:mb-16 text-center">
         <span
           class="text-orange-500 font-bold uppercase tracking-widest text-xs"
@@ -90,6 +90,25 @@
           অনন্য সংগ্রহশালা। প্রতিটি নোটের পেছনে রয়েছে একেকটি করুণ (অথবা হাসির)
           কাহিনী।
         </p>
+        <div class="market-board">
+          <div class="market-board-main">
+            <span class="board-kicker">Live Bargain Floor</span>
+            <h2>আজকের ছেঁড়া টাকার গোপন দরবার</h2>
+            <p>
+              এখানে দাম কমালে দাম বাড়ে, আর বেশি বললে উৎস ভাই সন্দেহ করেন।
+            </p>
+          </div>
+          <div class="market-meter" aria-hidden="true">
+            <span>ভরসা মিটার</span>
+            <div class="meter-track"><i></i></div>
+            <strong>৭১% নাটক</strong>
+          </div>
+          <div class="market-note-stack" aria-hidden="true">
+            <span class="note-slip note-slip-one">৳ ১০</span>
+            <span class="note-slip note-slip-two">টেপড</span>
+            <span class="note-slip note-slip-three">অমূল্য</span>
+          </div>
+        </div>
       </div>
 
       <!-- Search and Filter Section -->
@@ -129,6 +148,15 @@
         </div>
       </div>
 
+      <div class="offer-tape" aria-label="Funny market updates">
+        <div>
+          <span>লাইভ অফার: ৳ ১২</span>
+          <span>উৎস ভাইয়ের উত্তর: “এইটা কি দাম, না পকেটের আওয়াজ?”</span>
+          <span>ব্যাংক বলেছে: “আমরা এই নোটকে চিনতে পারছি না”</span>
+          <span>কার্টে ৩টা নোট নিলে ফ্রি সন্দেহ</span>
+        </div>
+      </div>
+
       <!-- Results Count -->
       <div class="mb-6 text-gray-400 text-sm font-medium">
         মোট <span id="results-count" class="text-orange-500">০</span>টি আইটেম
@@ -137,7 +165,7 @@
 
       <div
         id="collection-grid"
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
       ></div>
     </div>
 
