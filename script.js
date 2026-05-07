@@ -1,3 +1,22 @@
+// Theme Toggle Logic
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    body.classList.toggle("light-mode");
+    const isLight = body.classList.contains("light-mode");
+    themeToggle.innerText = isLight ? "🌙" : "☀️";
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+  });
+
+  // Load saved theme preference
+  if (localStorage.getItem("theme") === "light") {
+    body.classList.add("light-mode");
+    themeToggle.innerText = "🌙";
+  }
+}
+
 // Sample Product Injection
 const products = [
   {

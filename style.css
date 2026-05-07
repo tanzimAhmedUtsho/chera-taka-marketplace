@@ -17,7 +17,7 @@
 .glass-card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
-  border: 1px border rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -101,4 +101,45 @@ select#filterDropdown {
 select#filterDropdown option {
   background: #1a1a1a;
   color: white;
+}
+
+/* Light Mode Styles */
+body.light-mode {
+  background-color: #f8f9fa;
+  color: #1a1a1a;
+}
+
+body.light-mode .text-white,
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3 {
+  color: #1a1a1a;
+}
+
+body.light-mode .text-gray-400,
+body.light-mode .text-gray-300 {
+  color: #4b5563;
+}
+
+body.light-mode nav,
+body.light-mode header,
+body.light-mode footer,
+body.light-mode .bg-gradient-to-r {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
+
+body.light-mode .glass-card,
+body.light-mode .bg-white\/5,
+body.light-mode .bg-[#161616],
+body.light-mode .bg-black\/50 {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
+
+body.light-mode .border-white\/10,
+body.light-mode .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.1);
 }
