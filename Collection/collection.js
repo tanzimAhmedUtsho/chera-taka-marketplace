@@ -117,13 +117,15 @@ const filterDropdown = document.getElementById("filterDropdown");
 // ফিল্টার ড্রপডাউন ইভেন্ট লিসেনার
 if (filterDropdown) {
   filterDropdown.addEventListener("change", (e) => {
-    filterItems(e.target.value);
+    filterItems(e.target.value, container);
   });
 }
 
 // কার্ড রেন্ডার ফাংশন
-function displayItems(items) {
-  container.innerHTML = items
+function displayItems(items, targetContainer) {
+  const target = targetContainer || container;
+  if (!target) return;
+  target.innerHTML = items
     .map(
       (item) => `
         <div class="glass-morphism rounded-2xl overflow-hidden card-hover transition-all duration-300 group">
@@ -156,28 +158,31 @@ function displayItems(items) {
 }
 
 // ফিল্টার ফাংশন
-function filterItems(category) {
+function filterItems(category, targetContainer) {
   if (category === "all") {
-    displayItems(collectionData);
+    displayItems(collectionData, targetContainer);
   } else {
     const filtered = collectionData.filter(
       (item) => item.category === category,
     );
-    displayItems(filtered);
+    displayItems(filtered, targetContainer);
   }
 }
 
 // সার্চ ফাংশন
-searchInput.addEventListener("input", (e) => {
-  const term = e.target.value.toLowerCase();
-  const searched = collectionData.filter((item) =>
-    item.title.toLowerCase().includes(term),
-  );
-  displayItems(searched);
-});
+if (searchInput) {
+  searchInput.addEventListener("input", (e) => {
+    const term = e.target.value.toLowerCase();
+    const searched = collectionData.filter((item) =>
+      item.title.toLowerCase().includes(term),
+    );
+    displayItems(searched, container);
+  });
+}
 
 // শুরুতে সব আইটেম দেখাবে
-displayItems(collectionData);
+displayItems(collectionData, container);
+updateCartUI();
 
 // ডার্ক ও লাইট মোড টগল করার লজিক
 const themeToggleBtn = document.getElementById("theme-toggle");

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Collection | TAKA.TUKRO</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../style.css" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
@@ -17,14 +18,21 @@
         color: white;
       }
       .glass-morphism {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
       }
       .card-hover:hover {
         transform: translateY(-10px);
         border-color: #fbbf24;
-        box-shadow: 0 10px 30px -10px rgba(251, 191, 36, 0.3);
+        box-shadow: 0 20px 40px -15px rgba(251, 191, 36, 0.15);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 5px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 10px;
       }
     </style>
   </head>
@@ -36,7 +44,7 @@
         <span class="text-white">TAKA.</span
         ><span class="text-yellow-500">TUKRO</span>
       </div>
-      <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+      <nav class="hidden lg:flex space-x-8 text-sm uppercase tracking-widest">
         <a href="/index.html" class="hover:text-yellow-500 transition">হোম</a>
         <a
           href="/Collection/collection.html"
@@ -107,19 +115,19 @@
       </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-6 pb-24">
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <main class="max-w-[1400px] mx-auto px-6 pb-24">
+      <div class="flex flex-col lg:flex-row gap-10">
         <!-- বাম পাশে নোটের গ্রিড -->
         <div
           id="collection-container"
-          class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6"
+          class="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
         >
           <!-- জাভাস্ক্রিপ্ট দিয়ে কার্ডগুলো এখানে আসবে -->
         </div>
 
         <!-- ডান পাশে আপনার সংগৃহীত আইটেম এবং হিসাব -->
-        <div class="lg:col-span-1">
-          <div id="cart-calculation" class="sticky top-24">
+        <div class="lg:w-80 shrink-0">
+          <div id="cart-calculation" class="sticky top-28">
             <!-- এখানে কার্টের আইটেম এবং হিসাব দেখা যাবে -->
           </div>
         </div>
