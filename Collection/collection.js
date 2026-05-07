@@ -6,7 +6,7 @@ const collectionData = [
     category: "rare",
     price: "৬৫০ ৳",
     image:
-      "https://images.unsplash.com/photo-1627137818987-99528d99c922?q=80&w=400", // ডামি ইমেজ
+      "https://images.unsplash.com/photo-1627137818987-99528d99c922?q=80&w=400",
     status: "ভালো",
   },
   {
@@ -112,6 +112,14 @@ const collectionData = [
 
 const container = document.getElementById("collection-container");
 const searchInput = document.getElementById("searchInput");
+const filterDropdown = document.getElementById("filterDropdown");
+
+// ফিল্টার ড্রপডাউন ইভেন্ট লিসেনার
+if (filterDropdown) {
+  filterDropdown.addEventListener("change", (e) => {
+    filterItems(e.target.value);
+  });
+}
 
 // কার্ড রেন্ডার ফাংশন
 function displayItems(items) {
@@ -202,21 +210,203 @@ if (themeToggleBtn) {
 // --- সিম্পল কার্ট সিস্টেম লজিক ---
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function updateCartCount() {
-  const cartCountElement = document.getElementById("cart-count");
-  if (cartCountElement) {
-    cartCountElement.innerText = cart.length;
+// বাংলা সংখ্যাকে ইংরেজিতে রূপান্তরের ফাংশন (হিসাব করার জন্য)
+function bnToEn(str) {
+  const bn = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+  return str.replace(/[০-৯]/g, (s) => bn.indexOf(s));
+}
+
+// ইংরেজি সংখ্যাকে বাংলায় রূপান্তরের ফাংশন (প্রদর্শনের জন্য)
+function enToBn(str) {
+  const bn = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+  return str.toString().replace(/\d/g, (s) => bn[s]);
+}
+
+function updateCartUI() {
+  // কার্ট কাউন্ট আপডেট
+  const countElements = document.querySelectorAll(".cart-count");
+  countElements.forEach((el) => {
+    el.innerText = cart.length;
+    el.onclick = openMiniCart; // কাউন্টে ক্লিক করলে মিনি কার্ট খুলবে
+    el.style.cursor = "pointer";
+  });
+
+  // ক্যালকুলেশন প্যানেল আপডেট
+  const calcContainer = document.getElementById("cart-calculation");
+  const miniCartContent = document.getElementById("mini-cart-content");
+
+  // কমন ক্যালকুলেশন লজিক
+  const totalPrice = cart.reduce((sum, item) => {
+    const priceEn = bnToEn(item.price.replace(/[^\d০-৯]/g, ""));
+    return sum + (parseInt(priceEn) || 0);
+  }, 0);
+
+  const totalDamage = cart.reduce((sum, item) => {
+    const damageEn = bnToEn(item.status.replace(/[^\d০-৯]/g, ""));
+    return sum + (parseInt(damageEn) || 0);
+  }, 0);
+
+  const tapeNeeded = Math.ceil(totalDamage / 5);
+
+  // সাইড ক্যালকুলেশন রেন্ডার
+  if (calcContainer) {
+    if (cart.length === 0) {
+      calcContainer.innerHTML = generateCalculationHTML(totalPrice, tapeNeeded);
+    } else {
+      const sideItemsListHTML = `
+        <div class="mb-6 space-y-3 max-h-[350px] overflow-y-auto pr-2 custom-scrollbar animate-in fade-in slide-in-from-right duration-500">
+            <h4 class="text-white font-bold text-sm flex items-center gap-2 mb-4">
+                📂 আপনার সংগৃহীত আবর্জনা সমূহ:
+            </h4>
+            ${cart
+              .map(
+                (item, index) => `
+                <div class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 group hover:border-yellow-500/30 transition-all">
+                    <img src="${item.image}" class="w-10 h-10 object-cover rounded-lg" />
+                    <div class="flex-1 min-w-0">
+                        <p class="text-white text-xs font-bold truncate">${item.title}</p>
+                        <p class="text-yellow-500 text-[10px] font-bold">${item.price}</p>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-gray-500 hover:text-red-500 transition text-lg">&times;</button>
+                </div>
+            `,
+              )
+              .join("")}
+        </div>
+      `;
+      calcContainer.innerHTML =
+        sideItemsListHTML + generateCalculationHTML(totalPrice, tapeNeeded);
+    }
+  }
+
+  // মিনি কার্ট পপআপ রেন্ডার
+  if (miniCartContent) {
+    if (cart.length === 0) {
+      miniCartContent.innerHTML = `<p class="text-center text-gray-500 py-10 italic">আপনার থলেতে কোনো ছেঁড়া টাকা নেই! কিছু তো কিনুন...</p>`;
+    } else {
+      miniCartContent.innerHTML = `
+        <div class="space-y-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+          ${cart
+            .map(
+              (item, index) => `
+            <div class="flex items-center gap-4 bg-white/5 p-3 rounded-xl border border-white/5">
+              <img src="${item.image}" class="w-12 h-12 object-cover rounded-lg" />
+              <div class="flex-1">
+                <h4 class="text-white text-sm font-bold truncate">${item.title}</h4>
+                <p class="text-yellow-500 text-xs">${item.price}</p>
+              </div>
+              <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-400 text-lg">&times;</button>
+            </div>
+          `,
+            )
+            .join("")}
+        </div>
+        <div class="mt-6 pt-6 border-t border-white/10">
+          ${generateCalculationHTML(totalPrice, tapeNeeded)}
+          <button onclick="buyNowAll()" class="w-full mt-4 bg-yellow-500 text-black font-bold py-3 rounded-xl hover:bg-yellow-600 transition">সবগুলো একসাথে কিনুন</button>
+        </div>
+      `;
+    }
   }
 }
+
+function generateCalculationHTML(totalPrice, tapeNeeded) {
+  if (cart.length === 0) {
+    return `
+      <div class="text-center p-6 border-2 border-dashed border-white/10 rounded-2xl">
+        <p class="text-gray-500 italic text-sm">কার্ট খালি! কিছু আবর্জনা যোগ করুন।</p>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="bg-yellow-500/10 border border-yellow-500/30 p-6 rounded-2xl space-y-4 animate-in slide-in-from-right duration-500">
+        <h3 class="text-xl font-bold text-yellow-500 flex items-center gap-2">
+            📊 আপনার আবর্জনার হিসাব
+        </h3>
+        <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+                <span class="text-gray-400">মোট আইটেম:</span>
+                <span class="text-white font-bold">${enToBn(cart.length)} টি</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-400">উৎস ভাইয়ের লাভ:</span>
+                <span class="text-white font-bold">${enToBn(totalPrice)} ৳</span>
+            </div>
+            <div class="flex justify-between border-t border-white/10 pt-2">
+                <span class="text-gray-400">প্রয়োজনীয় কস্টেপ:</span>
+                <span class="text-blue-400 font-bold">${tapeNeeded} ইঞ্চি (প্রায়)</span>
+            </div>
+        </div>
+        <p class="text-[10px] text-gray-500 italic mt-4">* কস্টেপ এবং আঠা নিজ দায়িত্বে কিনে নিতে হবে। উৎস ভাই শুধু নোট দেবেন।</p>
+        <button onclick="clearCart()" class="w-full py-2 text-xs text-red-400 hover:text-red-300 transition">সব ডিলিট করুন</button>
+    </div>
+  `;
+}
+
+window.openMiniCart = function () {
+  let miniCart = document.getElementById("mini-cart-modal");
+  if (!miniCart) {
+    miniCart = document.createElement("div");
+    miniCart.id = "mini-cart-modal";
+    miniCart.className = "fixed inset-0 z-[150] flex justify-end hidden";
+    miniCart.innerHTML = `
+      <div onclick="closeMiniCart()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+      <div class="relative w-full max-w-sm bg-[#0f0f0f] border-l border-white/10 p-6 h-full shadow-2xl animate-in slide-in-from-right duration-300">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-white">🛍️ আবর্জনার থলি</h2>
+          <button onclick="closeMiniCart()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+        </div>
+        <div id="mini-cart-content"></div>
+      </div>
+    `;
+    document.body.appendChild(miniCart);
+  }
+  miniCart.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  updateCartUI();
+};
+
+window.closeMiniCart = function () {
+  const miniCart = document.getElementById("mini-cart-modal");
+  if (miniCart) miniCart.classList.add("hidden");
+  document.body.style.overflow = "auto";
+};
+
+window.removeFromCart = function (index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartUI();
+};
+
+window.buyNowAll = function () {
+  alert(
+    "উৎস ভাই খবর পাঠিয়েছেন: এতগুলো ছেঁড়া টাকা একসাথে পকেটে নিলে আপনার প্যান্ট ছিঁড়ে যেতে পারে! সাবধানে অর্ডার করুন।",
+  );
+  closeMiniCart();
+};
 
 window.addToCart = function (id) {
   const item = collectionData.find((i) => i.id === id);
   if (item) {
     cart.push(item);
     localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-    alert(`"${item.title}" কার্টে যোগ করা হয়েছে!`);
+    updateCartUI();
+
+    // একটি ছোট ফানি এলার্ট
+    const toast = document.createElement("div");
+    toast.className =
+      "fixed bottom-5 right-5 bg-yellow-500 text-black px-6 py-3 rounded-full font-bold z-[200] animate-bounce";
+    toast.innerText = "সাবাস! আরও একটি ছেঁড়া টাকা পকেটে ভরলেন!";
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
   }
+};
+
+window.clearCart = function () {
+  cart = [];
+  localStorage.removeItem("cart");
+  updateCartUI();
 };
 
 window.buyNow = function (id) {
@@ -277,4 +467,4 @@ window.handleCheckout = function (event, itemTitle) {
 };
 
 // শুরুতে কার্ট কাউন্ট আপডেট করা
-updateCartCount();
+updateCartUI();
