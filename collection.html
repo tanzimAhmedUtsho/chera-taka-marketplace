@@ -64,7 +64,7 @@
       <div
         class="mb-12 flex flex-col md:flex-row gap-4 items-center justify-between bg-white/5 p-6 rounded-2xl border border-white/10 glass-card"
       >
-        <div class="relative w-full md:w-1/2">
+        <div class="relative w-full md:w-2/5">
           <input
             type="text"
             id="searchInput"
@@ -84,6 +84,17 @@
             <option value="টেপ লাগানো">টেপ লাগানো</option>
             <option value="ইঁদুরে খাওয়া">ইঁদুরে খাওয়া</option>
             <option value="পুরানো">ঐতিহাসিক/পুরানো</option>
+          </select>
+        </div>
+
+        <div class="w-full md:w-1/4">
+          <select
+            id="sortOrder"
+            class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:border-orange-500 outline-none transition text-gray-300 appearance-none cursor-pointer"
+          >
+            <option value="default">সর্টিং করুন</option>
+            <option value="lowToHigh">দাম: কম থেকে বেশি</option>
+            <option value="highToLow">দাম: বেশি থেকে কম</option>
           </select>
         </div>
       </div>
