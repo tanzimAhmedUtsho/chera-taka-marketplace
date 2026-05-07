@@ -131,9 +131,15 @@ function displayItems(items) {
                     <span class="text-gray-400 text-sm">অবস্থা: ${item.status}</span>
                     <span class="text-yellow-500 font-bold text-lg">${item.price}</span>
                 </div>
-                <button class="w-full py-3 border border-yellow-500 text-yellow-500 rounded-lg font-bold hover:bg-yellow-500 hover:text-black transition duration-300">
-                    বিস্তারিত দেখুন
-                </button>
+                <div class="flex flex-col gap-2">
+                    <button class="w-full py-2 border border-yellow-500 text-yellow-500 rounded-lg font-bold hover:bg-yellow-500 hover:text-black transition duration-300 text-sm">
+                        বিস্তারিত দেখুন
+                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="addToCart(${item.id})" class="flex-1 py-2 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition text-[10px] sm:text-xs">🛒 কার্টে যোগ করুন</button>
+                        <button onclick="buyNow(${item.id})" class="flex-1 py-2 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition text-[10px] sm:text-xs">এখনই কিনুন</button>
+                    </div>
+                </div>
             </div>
         </div>
     `,
@@ -164,3 +170,111 @@ searchInput.addEventListener("input", (e) => {
 
 // শুরুতে সব আইটেম দেখাবে
 displayItems(collectionData);
+
+// ডার্ক ও লাইট মোড টগল করার লজিক
+const themeToggleBtn = document.getElementById("theme-toggle");
+
+// পেজ লোড হওয়ার সময় লোকাল স্টোরেজ থেকে থিম চেক করা
+const savedTheme = localStorage.getItem("theme") || "dark";
+if (savedTheme === "light") {
+  document.body.classList.add("light-mode");
+}
+
+if (themeToggleBtn) {
+  // বাটন টেক্সট ইনিশিয়ালাইজ করা
+  themeToggleBtn.innerText =
+    savedTheme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode";
+
+  themeToggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    const isLight = document.body.classList.contains("light-mode");
+    const theme = isLight ? "light" : "dark";
+
+    // থিম স্টোর করা যাতে রিফ্রেশ দিলেও সেটিংস না হারায়
+    localStorage.setItem("theme", theme);
+
+    // ইউজারকে বোঝানোর জন্য বাটনের টেক্সট এবং আইকন আপডেট
+    themeToggleBtn.innerText = isLight ? "🌙 Dark Mode" : "☀️ Light Mode";
+  });
+}
+
+// --- সিম্পল কার্ট সিস্টেম লজিক ---
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function updateCartCount() {
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) {
+    cartCountElement.innerText = cart.length;
+  }
+}
+
+window.addToCart = function (id) {
+  const item = collectionData.find((i) => i.id === id);
+  if (item) {
+    cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert(`"${item.title}" কার্টে যোগ করা হয়েছে!`);
+  }
+};
+
+window.buyNow = function (id) {
+  const item = collectionData.find((i) => i.id === id);
+  if (!item) return;
+
+  // চেকআউট মডাল তৈরি বা সিলেক্ট করা
+  let modal = document.getElementById("checkout-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "checkout-modal";
+    modal.className =
+      "fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden";
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="bg-[#1a1a1a] border border-white/10 p-8 rounded-3xl max-w-md w-full relative animate-in fade-in zoom-in duration-300">
+        <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl transition">&times;</button>
+        <h2 class="text-2xl font-bold text-white mb-4">অর্ডার কনফার্ম করুন</h2>
+        <div class="flex items-center gap-4 mb-6 p-4 bg-white/5 rounded-2xl border border-white/5">
+            <img src="${item.image}" class="w-16 h-16 object-cover rounded-xl" />
+            <div>
+                <h4 class="text-white font-bold">${item.title}</h4>
+                <p class="text-yellow-500 font-bold">${item.price}</p>
+            </div>
+        </div>
+        <form onsubmit="handleCheckout(event, '${item.title}')" class="space-y-4">
+            <div>
+                <label class="block text-sm text-gray-400 mb-1">আপনার নাম</label>
+                <input type="text" required placeholder="নাম লিখুন" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition">
+            </div>
+            <div>
+                <label class="block text-sm text-gray-400 mb-1">ফোন নম্বর</label>
+                <input type="tel" required placeholder="017xxxxxxxx" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition">
+            </div>
+            <button type="submit" class="w-full bg-yellow-500 text-black font-bold py-4 rounded-xl hover:bg-yellow-600 transition mt-4">অর্ডার সম্পন্ন করুন</button>
+        </form>
+    </div>
+  `;
+
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+};
+
+window.closeCheckoutModal = function () {
+  const modal = document.getElementById("checkout-modal");
+  if (modal) modal.classList.add("hidden");
+  document.body.style.overflow = "auto";
+};
+
+window.handleCheckout = function (event, itemTitle) {
+  event.preventDefault();
+  alert(
+    `ধন্যবাদ! "${itemTitle}" এর অর্ডারটি গ্রহণ করা হয়েছে। তানজীম আহমেদ উৎস ভাই কিছুক্ষণের মধ্যেই আপনার সাথে যোগাযোগ করবেন। (আব্বাকে নিয়ে তিনি হেলিকপ্টারে করে আসতে পারেন!)`,
+  );
+  closeCheckoutModal();
+};
+
+// শুরুতে কার্ট কাউন্ট আপডেট করা
+updateCartCount();
