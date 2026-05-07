@@ -96,6 +96,7 @@ const gridContainer = document.getElementById("collection-grid");
 const searchInput = document.getElementById("searchInput");
 const categoryFilter = document.getElementById("categoryFilter");
 const sortOrder = document.getElementById("sortOrder");
+const resultsCount = document.getElementById("results-count");
 
 function displayCollections(filteredData = collections) {
   if (!gridContainer) return;
@@ -106,26 +107,32 @@ function displayCollections(filteredData = collections) {
         <p class="text-gray-500 text-lg">দুঃখিত! এই নামে বা ক্যাটাগরিতে কোনো নোট খুঁজে পাওয়া যায়নি। 😢</p>
       </div>
     `;
+    if (resultsCount) resultsCount.innerText = "0";
     return;
   }
+
+  if (resultsCount) resultsCount.innerText = filteredData.length;
 
   gridContainer.innerHTML = filteredData
     .map(
       (item) => `
-        <div class="glass-card group rounded-2xl overflow-hidden transition-all duration-500">
+        <div class="glass-card group rounded-2xl overflow-hidden transition-all duration-500 animate-fadeIn">
             <div class="relative h-60 overflow-hidden">
                 <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span class="absolute top-4 right-4 bg-orange-600 text-[10px] uppercase font-bold px-3 py-1.5 rounded-full shadow-lg">
+                <span class="absolute top-4 right-4 bg-orange-600 text-[11px] uppercase font-black tracking-wider text-white px-3 py-1.5 rounded-full shadow-xl">
                     ${item.price}
+                </span>
+                <span class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                    ${item.category}
                 </span>
             </div>
 
             <div class="p-6">
-                <h3 class="text-xl font-bold mb-2 group-hover:text-orange-500 transition-colors text-white">${item.title}</h3>
+                <h3 class="text-xl font-bold mb-2 group-hover:text-orange-500 transition-all text-white line-clamp-1">${item.title}</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-2">${item.desc}</p>
-                <button class="w-full py-3 bg-orange-500/10 border border-orange-500/30 text-orange-500 text-sm font-bold rounded-xl hover:bg-orange-500 hover:text-black transition-all duration-300">
-                    বিস্তারিত দেখুন
+                <button class="w-full py-3 bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30 text-orange-500 text-sm font-bold rounded-xl hover:from-orange-500 hover:to-red-600 hover:text-black hover:border-transparent transition-all duration-500 shadow-lg shadow-orange-500/5">
+                    সংগ্রহ করুন
                 </button>
             </div>
         </div>
@@ -156,8 +163,10 @@ function filterCollections() {
   displayCollections(filtered);
 }
 
-searchInput?.addEventListener("input", filterCollections);
-categoryFilter?.addEventListener("change", filterCollections);
-sortOrder?.addEventListener("change", filterCollections);
+document.addEventListener("DOMContentLoaded", () => {
+  searchInput?.addEventListener("input", filterCollections);
+  categoryFilter?.addEventListener("change", filterCollections);
+  sortOrder?.addEventListener("change", filterCollections);
+});
 
 displayCollections();
