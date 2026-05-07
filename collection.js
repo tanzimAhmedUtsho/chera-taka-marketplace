@@ -8,6 +8,9 @@ const collections = [
     img: "https://images.unsplash.com/photo-1621932953986-15fcf084da0f?q=80&w=400",
     desc: "কস্টেপ লাগানো ভিন্টেজ নোট, বাম পাশের কোণা নেই।",
     category: "টেপ লাগানো",
+    history:
+      "এই নোটটি উৎস ভাইয়ের আব্বার ৭১তম ব্যবসার উদ্বোধনের দিন ড্রয়ারে চাপা পড়েছিল। এটি এখন ত্যাগের প্রতীক।",
+    fact: "এটি পকেটে থাকলে উৎস ভাইয়ের হেলিকপ্টারের শব্দ শোনা যায় (সম্ভবত আপনার কানে সমস্যা)।",
   },
   {
     id: 2,
@@ -17,6 +20,9 @@ const collections = [
     img: "https://images.unsplash.com/photo-1589758438368-213672e39892?q=80&w=400",
     desc: "ঐতিহাসিক ইঁদুরে খাওয়া ডিজাইন, দুর্লভ সংগ্রহ।",
     category: "ইঁদুরে খাওয়া",
+    history:
+      "এটি একটি লাইব্রেরির কোণায় পড়ে ছিল। ইঁদুর বাবাজি তার ডিনার হিসেবে এর ৬০% সাবাড় করেছেন।",
+    fact: "বাকি ৪০% দিয়ে আপনি এখনো ১টা চকলেট কেনার সাহস করতে পারেন (যদি দোকানদার পরিচিত হয়)।",
   },
   {
     id: 3,
@@ -26,6 +32,9 @@ const collections = [
     img: "https://images.unsplash.com/photo-1625217527288-93919c99650a?q=80&w=400",
     desc: "১৯৯০ সালের অরিজিনাল স্টিল কয়েন।",
     category: "পুরানো",
+    history:
+      "১৯৯০ সালের এই কয়েনটি একবার সাগরে পড়ে গিয়েছিল। এক মাছ ধরার জালে এটি উঠে আসে।",
+    fact: "এতে এখনো সাগরের লোনা পানির গন্ধ পাওয়া যায় (হয়তো আপনার কল্পনা)।",
   },
   {
     id: 4,
@@ -35,6 +44,9 @@ const collections = [
     img: "https://images.unsplash.com/photo-1594913366159-1832ffef8511?q=80&w=400",
     desc: "সম্পূর্ণ কালো হয়ে যাওয়া ১০০% খাঁটি ময়লা নোট।",
     category: "ছিঁড়া",
+    history:
+      "এটি একটি মানিব্যাগে টানা ৫ বছর বন্দি ছিল। আলোর মুখ না দেখে এটি কালো হয়ে গিয়েছে।",
+    fact: "এর ময়লা দিয়ে ছোটখাটো একটি বাগান করা সম্ভব।",
   },
   {
     id: 5,
@@ -44,6 +56,8 @@ const collections = [
     img: "https://images.unsplash.com/photo-1633158829585-23bb8f628932?q=80&w=400",
     desc: "আগুনের ছোঁয়ায় শৈল্পিক রূপ পাওয়া নোট।",
     category: "ছিঁড়া",
+    history: "রান্নাঘরে গ্যাসের চুলার পাশে এটি অসাবধানতাবশত পড়ে গিয়েছিল।",
+    fact: "এটি স্পর্শ করলে এখনো হালকা গরম অনুভূত হয় (হিটার বন্ধ করুন)।",
   },
   {
     id: 6,
@@ -53,6 +67,9 @@ const collections = [
     img: "https://images.unsplash.com/photo-1580519324649-c50de8176c5c?q=80&w=400",
     desc: "প্যান্টের পকেটে রেখে ওয়াশিং মেশিনে ধোয়া ধবধবে সাদা নোট।",
     category: "ছিঁড়া",
+    history:
+      "লন্ড্রি থেকে আসার পর এই নোটটি তার সব রং হারিয়ে সাদা ধবধবে হয়ে গেছে।",
+    fact: "এটি এখন এত পরিষ্কার যে এতে নিজের মুখ দেখা যায়।",
   },
   {
     id: 7,
@@ -62,6 +79,8 @@ const collections = [
     img: "https://images.unsplash.com/photo-1509017174183-0b7e0278f1ec?q=80&w=400",
     desc: "কারো হৃদয়ের নাম লেখা, প্রেমের এক অনন্য নিদর্শন।",
     category: "পুরানো",
+    history: "কারো প্রিয়তমার নাম লেখা এই নোটটি বিরহের এক জীবন্ত দলিল।",
+    fact: "নোটটির দিকে তাকালে মন খারাপ হওয়ার সম্ভাবনা ১০০%।",
   },
   {
     id: 8,
@@ -71,6 +90,9 @@ const collections = [
     img: "https://images.unsplash.com/photo-1621932953986-15fcf084da0f?q=80&w=400",
     desc: "কয়েন কীভাবে ছিঁড়লো তা একটি রহস্য।",
     category: "ছিঁড়া",
+    history:
+      "উৎস ভাই এটি কুড়িয়ে পেয়েছিলেন। কয়েন কীভাবে ছিঁড়তে পারে, তা নিয়ে তিনি এখনো গবেষণা করছেন।",
+    fact: "এটি নাড়াচাড়া করলে অদ্ভুত এক ধাতব শব্দ পাওয়া যায়।",
   },
   {
     id: 9,
@@ -80,6 +102,9 @@ const collections = [
     img: "https://images.unsplash.com/photo-1621932953986-15fcf084da0f?q=80&w=400",
     desc: "উইপোকার আক্রমণে ঝাঝরা হয়ে যাওয়া আস্ত বান্ডিল।",
     category: "ইঁদুরে খাওয়া",
+    history:
+      "একটি ড্রয়ারে ৩ বছর পড়ে থাকার পর উইপোকা এর পুরো স্বাদ আস্বাদন করেছে।",
+    fact: "এটি এখন জাফরি কাটা নকশার মত দেখায়।",
   },
   {
     id: 10,
@@ -89,6 +114,9 @@ const collections = [
     img: "https://images.unsplash.com/photo-1594913366159-1832ffef8511?q=80&w=400",
     desc: "হোলি খেলার সময় পকেটে থাকা রঙিন স্মৃতির নোট।",
     category: "ছিঁড়া",
+    history:
+      "উৎস ভাই হোলি খেলার সময় এই নোটটি পকেটে ছিল। রঙের ছোঁয়ায় এটি রঙিন হয়েছে।",
+    fact: "এটি আপনার পকেটে থাকলে আপনার মানিব্যাগও রঙিন হয়ে যাবে।",
   },
 ];
 
@@ -100,6 +128,7 @@ const resultsCount = document.getElementById("results-count");
 const cartItemsContainer = document.getElementById("cart-items");
 const cartCountLabel = document.getElementById("cart-count");
 const cartTotalLabel = document.getElementById("cart-total");
+const navTotalLabel = document.getElementById("nav-total");
 
 let cart = [];
 
@@ -136,9 +165,12 @@ function displayCollections(filteredData = collections) {
             <div class="p-6">
                 <h3 class="text-xl font-bold mb-2 group-hover:text-orange-500 transition-all text-white line-clamp-1">${item.title}</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-2">${item.desc}</p>
-                <button onclick="addToCart(${item.id})" class="w-full py-3 bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30 text-orange-500 text-sm font-bold rounded-xl hover:from-orange-500 hover:to-red-600 hover:text-black hover:border-transparent transition-all duration-500 shadow-lg shadow-orange-500/5 flex items-center justify-center gap-2">
-                    <span>🛒</span> কার্টে ভরুন
-                </button>
+                <div class="flex gap-2">
+                   <button onclick="showDetails(${item.id})" class="flex-1 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold rounded-xl hover:bg-white/10 transition-all">বিস্তারিত</button>
+                   <button onclick="addToCart(${item.id})" class="flex-[2] py-3 bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30 text-orange-500 text-sm font-bold rounded-xl hover:from-orange-500 hover:to-red-600 hover:text-black hover:border-transparent transition-all duration-500 shadow-lg shadow-orange-500/5 flex items-center justify-center gap-2">
+                      <span>🛒</span> কার্টে ভরুন
+                   </button>
+                </div>
             </div>
         </div>
     `,
@@ -150,6 +182,34 @@ function displayCollections(filteredData = collections) {
 function toggleCart() {
   const drawer = document.getElementById("cart-drawer");
   drawer.classList.toggle("translate-x-full");
+}
+
+function showDetails(id) {
+  const item = collections.find((c) => c.id === id);
+  const modal = document.getElementById("details-modal");
+  const content = document.getElementById("details-content");
+  const addBtn = document.getElementById("modal-add-btn");
+
+  content.innerHTML = `
+    <img src="${item.img}" class="w-full h-52 object-cover rounded-2xl mb-6 shadow-xl border border-white/10">
+    <h2 class="text-2xl font-bold text-white mb-4">${item.title}</h2>
+    <div class="text-left space-y-4">
+       <p class="text-gray-300 text-sm leading-relaxed"><span class="text-orange-500 font-bold block mb-1">📜 ইতিহাস:</span> ${item.history || item.desc}</p>
+       <p class="text-gray-300 text-sm leading-relaxed"><span class="text-yellow-500 font-bold block mb-1">✨ মজার তথ্য:</span> ${item.fact || "এটি একটি অত্যন্ত দুর্লভ নোট যা দেখলে চোখ জুড়িয়ে যায়!"}</p>
+    </div>
+  `;
+
+  addBtn.onclick = () => {
+    addToCart(id);
+    closeDetailsModal();
+  };
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeDetailsModal() {
+  document.getElementById("details-modal").classList.add("hidden");
+  document.body.style.overflow = "auto";
 }
 
 function addToCart(id) {
@@ -195,7 +255,8 @@ function updateCartUI() {
     })
     .join("");
 
-  cartTotalLabel.innerText = total > 0 ? `৳ ${total}` : "অমূল্য!";
+  const formattedTotal = total > 0 ? `৳ ${total}` : "অমূল্য!";
+  cartTotalLabel.innerText = navTotalLabel.innerText = formattedTotal;
 }
 
 function removeFromCart(index) {
