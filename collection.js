@@ -474,11 +474,104 @@ function filterCollections() {
   displayCollections(filtered);
 }
 
+// Live Chat Logic
+function toggleLiveChat() {
+  const chatWindow = document.getElementById("live-chat-window");
+  if (chatWindow) {
+    chatWindow.classList.toggle("hidden");
+    if (!chatWindow.classList.contains("hidden")) {
+      document.getElementById("live-chat-input")?.focus();
+    }
+  }
+}
+
+function sendLiveChatMessage() {
+  const input = document.getElementById("live-chat-input");
+  const chatMessages = document.getElementById("live-chat-messages");
+  if (!input || !chatMessages) return;
+
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  // User Message
+  chatMessages.innerHTML += `
+    <div class="flex justify-end">
+      <div class="bg-orange-500 text-black rounded-2xl rounded-tr-none p-3 max-w-[85%] font-medium">
+        ${msg}
+      </div>
+    </div>
+  `;
+
+  input.value = "";
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  // Show Typing status
+  const typingId = "typing-" + Date.now();
+  chatMessages.innerHTML += `
+    <div id="${typingId}" class="flex justify-start">
+      <div class="bg-white/5 border border-white/10 rounded-2xl rounded-tl-none p-3 text-gray-500 italic">
+        উৎস ভাই টাইপ করছেন...
+      </div>
+    </div>
+  `;
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  // Funny Replies from Utsho Bhai with local & trendy humor
+  const funnyReplies = [
+    "আরে ভাই, একটু ওয়েট করেন। আব্বা নতুন একটা ব্যবসা খুলল, রিবন কাটতে যাচ্ছি। ✂️",
+    "আপনার মেসেজটা এতই ভারী যে আমার হেলিকপ্টারে তেল শেষ হয়ে গেছে! 🚁",
+    "কস্টেপ লাগানো নোট কি আপনার কাছে আছে? থাকলে বিকাশে ছবি পাঠান! 😂",
+    "আমি এখন দুবাইয়ের বুর্জ খলিফার ওপর বসে টাকা শুকাইতেছি। পরে কথা হবে। 🏜️",
+    "সালামের উত্তর নিয়েছি, এখন ৫০০ টাকার একটা ছেঁড়া নোট কুরিয়ার করেন।",
+    "আপনার সাথে কথা বলতে বলতে আব্বা ৭২ নম্বর ব্যবসার প্ল্যান পাস করে দিলেন! 📈",
+    "ভাই, ইঁদুরে খাওয়া নোটের কথা বললে মেসেজ দেন, নয়তো হেলিকপ্টারের আওয়াজে কিছু শুনতেছি না!",
+    "আপনার নোটের অবস্থা তো আমার এক্সের হার্টের চেয়েও বেশি ভাঙাচোরা! 💔",
+    "আব্বাকে বললাম আপনার কথা, উনি খুশিতে ৭২ নম্বর ব্যবসার নাম আপনার নামে রাখতে চাইলেন! 🏢",
+    "এতক্ষণ পর একটা জুতসই মেসেজ দিলেন! উৎস ভাই এখন হেলিকপ্টার নিয়ে আপনার ছাদে ল্যান্ড করতেছে। 🚁",
+    "ভাই, এই ছেঁড়া নোট নিয়ে বাজারে গেলে তো গণধোলাই কনফার্ম! তার চেয়ে উৎস ভাইকে দিয়ে দেন। 🤕",
+    "আপনার নোটটা নাকি ইলন মাস্ক কিনতে চাইছে, কস্টেপটা একটু ভালো দেখে লাগান! 🛰️",
+    "আপনার অফার শুনে আমার পোষা বিড়ালটাও হাসতে হাসতে ৭৩ নম্বর ব্যবসার বুদ্ধি দিচ্ছে। 🐱",
+    "ভাই, আমি এখন দুবাই থেকে সোনার কস্টেপ কিনতেছি আপনার নোটের জন্য। একটু লাইনে থাকেন। 🇦🇪",
+    "আপনার মেসেজ সিন করতে করতে আব্বা আরও দুইটা নতুন কোম্পানি খুলে ফেললেন! টাইম ইজ মানি ব্রো! ⏳",
+    "ভাই, এই নোট দিয়ে তো এখন আর বাদামও পাওয়া যাবে না, উৎস ভাই থাকতে ভয় কি? 🥜",
+    "আপনার চ্যাট দেখে মনে হচ্ছে আপনিও আমার মত বড় ব্যবসায়ী হতে চান। কিন্তু আব্বার পারমিশন লাগবে! 💼",
+    "আপনার নোটের কন্ডিশন তো আমার হেলিকপটারের এসির চেয়েও ঠান্ডা! ❄️",
+    "উৎস ভাইয়ের সাথে চ্যাট করতেছেন, ভাবটাই আলাদা! আব্বা শুনলে খুশিই হবে। 😎",
+    "এই ছেঁড়া নোটের বাজারে আপনিই তো আসল 'ভাইব'! ডিল হবে হেলিকপ্টারে। 🤙",
+  ];
+
+  setTimeout(() => {
+    const typingElem = document.getElementById(typingId);
+    if (typingElem) typingElem.remove();
+
+    const randomReply =
+      funnyReplies[Math.floor(Math.random() * funnyReplies.length)];
+    chatMessages.innerHTML += `
+      <div class="flex justify-start">
+        <div class="bg-white/5 border border-white/10 rounded-2xl rounded-tl-none p-3 text-gray-300 max-w-[85%]">
+          ${randomReply}
+        </div>
+      </div>
+    `;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }, 1500);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initElements();
   searchInput?.addEventListener("input", filterCollections);
   categoryFilter?.addEventListener("change", filterCollections);
   sortOrder?.addEventListener("change", filterCollections);
+
+  // Live Chat Enter Key Listener
+  document
+    .getElementById("live-chat-input")
+    ?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        sendLiveChatMessage();
+      }
+    });
+
   document.getElementById("haggle-offer")?.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
