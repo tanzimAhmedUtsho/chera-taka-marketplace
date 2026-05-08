@@ -544,12 +544,31 @@ function sendLiveChatMessage() {
     const typingElem = document.getElementById(typingId);
     if (typingElem) typingElem.remove();
 
+    // Funny GIFs to represent Utsho Bhai's lifestyle
+    const funnyGifs = [
+      "https://media.giphy.com/media/LdOyjZ7TC5K3LHSvzo/giphy.gif", // Money rain
+      "https://media.giphy.com/media/3o7TKVUn7iM8FMEU24/giphy.gif", // Dancing with money
+      "https://media.giphy.com/media/26n6WywJyh3AQWJJC/giphy.gif", // Thinking hard
+      "https://media.giphy.com/media/xUPGcyiM6qhZJNcH3a/giphy.gif", // Helicopter/Fast vibe
+      "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJ6ZnR6Znp6Znp6Znp6Znp6Znp6Znp6Znp6Znp6Znp6Znp6Znp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o6gbeW16O6mO5mO6Q/giphy.gif", // Funny confusion
+    ];
+
     const randomReply =
       funnyReplies[Math.floor(Math.random() * funnyReplies.length)];
+
+    // 40% chance to show a funny GIF along with the text reply
+    const showGif = Math.random() > 0.6;
+    let gifHtml = "";
+    if (showGif) {
+      const randomGif = funnyGifs[Math.floor(Math.random() * funnyGifs.length)];
+      gifHtml = `<img src="${randomGif}" class="w-full rounded-xl mt-2 border border-white/10 shadow-lg shadow-black/40" alt="Utsho Bhai Vibe">`;
+    }
+
     chatMessages.innerHTML += `
       <div class="flex justify-start">
         <div class="bg-white/5 border border-white/10 rounded-2xl rounded-tl-none p-3 text-gray-300 max-w-[85%]">
-          ${randomReply}
+          <p>${randomReply}</p>
+          ${gifHtml}
         </div>
       </div>
     `;
