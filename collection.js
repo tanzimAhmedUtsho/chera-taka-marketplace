@@ -553,8 +553,42 @@ function sendLiveChatMessage() {
       "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJ6ZnR6Znp6Znp6Znp6Znp6Znp6Znp6Znp6Znp6Znp6Znp6Znp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o6gbeW16O6mO5mO6Q/giphy.gif", // Funny confusion
     ];
 
-    const randomReply =
-      funnyReplies[Math.floor(Math.random() * funnyReplies.length)];
+    // Smart keyword detection
+    const lowerMsg = msg.toLowerCase();
+    let finalReply = "";
+
+    if (
+      lowerMsg.includes("আব্বা") ||
+      lowerMsg.includes("বাবা") ||
+      lowerMsg.includes("father")
+    ) {
+      finalReply =
+        "আব্বা এখন ৭২ নম্বর ব্যবসার ফাইল সই করতেছেন। ওনারে ডিস্টার্ব করা যাবে না, আমার সাথে কথা বলেন! 📁";
+    } else if (
+      lowerMsg.includes("হেলিকপ্টার") ||
+      lowerMsg.includes("helicopter") ||
+      lowerMsg.includes("হেলিকপটার")
+    ) {
+      finalReply =
+        "হেলিকপ্টারের চাবি তো আমার পকেটে! আপনার বাড়ির ছাদ কি খালি আছে? এখনই ল্যান্ড করবো! 🚁";
+    } else if (
+      lowerMsg.includes("টাকা") ||
+      lowerMsg.includes("taka") ||
+      lowerMsg.includes("ছেঁড়া")
+    ) {
+      finalReply =
+        "ছেঁড়া টাকার কথা বলছেন? আপনি সঠিক জায়গায় আসছেন। উৎস ভাই থাকতে চিন্তা নাই! 💸";
+    } else if (
+      lowerMsg.includes("কেমন") ||
+      lowerMsg.includes("খবর") ||
+      lowerMsg.includes("কি অবস্থা")
+    ) {
+      finalReply =
+        "খবর ভালো! আব্বার ৭১টা ব্যবসার প্রফিট গুনতে গুনতে টায়ার্ড হয়ে গেছি ভাই। আপনার খবর কন। 😎";
+    } else {
+      finalReply =
+        funnyReplies[Math.floor(Math.random() * funnyReplies.length)];
+    }
 
     // 40% chance to show a funny GIF along with the text reply
     const showGif = Math.random() > 0.6;
@@ -567,7 +601,7 @@ function sendLiveChatMessage() {
     chatMessages.innerHTML += `
       <div class="flex justify-start">
         <div class="bg-white/5 border border-white/10 rounded-2xl rounded-tl-none p-3 text-gray-300 max-w-[85%]">
-          <p>${randomReply}</p>
+          <p>${finalReply}</p>
           ${gifHtml}
         </div>
       </div>
